@@ -12,9 +12,9 @@ public function showLogin(){
     return view('auth.login');
 }
 public function login(Request $request){
-$credentials=$request->validate([
-'email'=>['require','email'],
-'password'=>['require'],
+$credentials = $request->validate([
+    'email' => ['required', 'email'],
+    'password' => ['required'],
 ]);
 if(Auth::attempt($credentials)){
     $request->session()->regenerate();
@@ -31,6 +31,6 @@ public function logout(Request $request){
     $request->session()->regenerateToken();
     return redirect('/login');
 }
-    
+
 }
 
