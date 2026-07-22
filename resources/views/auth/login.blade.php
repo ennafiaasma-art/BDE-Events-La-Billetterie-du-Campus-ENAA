@@ -43,7 +43,7 @@
                         name="email"
                         value="{{ old('email') }}"
                         required
-                        placeholder="exemple@etudiant.fr"
+                        placeholder="exemple@gmail.com"
                         class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm outline-none transition focus:border-purple-600 focus:ring-4 focus:ring-purple-100"
                     >
                 </div>
