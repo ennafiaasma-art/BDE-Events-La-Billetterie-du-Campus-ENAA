@@ -24,5 +24,6 @@ Route::get('dashboard',function(){
     return view('dashboard');})->name('dashboard');
 
     Route::get('dashbordEtu' , [EtudiantController::class,  'dashboard'])->name('dashbordEtu');
+    Route::get('evenement' , [EvenementController::class, 'index'])->name('evenement');
 
 });

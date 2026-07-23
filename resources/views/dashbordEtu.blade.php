@@ -22,9 +22,9 @@
 
         <nav class="mt-6">
 
-            <a href="#" class="flex items-center px-6 py-3 hover:bg-blue-600 transition">
+            <a href="{{ route('evenement') }}" class="flex items-center px-6 py-3 hover:bg-blue-600 transition">
                 📅
-                <span class="ml-3">Événements</span>
+                <span class="ml-3">Événements </span>
             </a>
 
             <a href="#" class="flex items-center px-6 py-3 hover:bg-blue-600 transition">

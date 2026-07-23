@@ -10,13 +10,12 @@ class EvenementController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $evenement=Evenement::all();
-        return view('admin.evenements.index', compact('evenements'));
+   public function index()
+{
+    $evenements = Evenement::with('reservations')->get();
 
-        //
-    }
+    return view('evenement', compact('evenements'));
+}
 
     /**
      * Show the form for creating a new resource.
