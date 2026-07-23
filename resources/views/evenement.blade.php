@@ -37,7 +37,7 @@
 
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
 
-           
+
 
             <div class="p-6">
 
@@ -80,14 +80,30 @@
 
 
 
-                    <td class="text-center">
+                   @php
+    $dejaReserve = $reservations->contains('evenement_id', $evenement->id);
+@endphp
 
-                                <a href="#"
-                                   class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
-                                    Réserver
-                                </a>
+@if($dejaReserve)
 
-                            </td>
+<button
+    class="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed"
+    disabled>
+    Déjà réservé
+</button>
+
+@else
+
+<form action="{{ route('reservations.store', $evenement->id) }}" method="POST">
+    @csrf
+
+    <button
+        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+        Réserver
+    </button>
+</form>
+
+@endif
 
                 </div>
 

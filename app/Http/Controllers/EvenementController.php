@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evenement;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class EvenementController extends Controller
@@ -13,8 +14,9 @@ class EvenementController extends Controller
    public function index()
 {
     $evenements = Evenement::with('reservations')->get();
+        $reservations = Reservation::where('etudiant_id', auth()->id())->get();
 
-    return view('evenement', compact('evenements'));
+    return view('evenement', compact('evenements','reservations'));
 }
 
     /**

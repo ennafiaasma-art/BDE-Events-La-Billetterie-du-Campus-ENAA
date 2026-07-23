@@ -27,7 +27,7 @@
                 <span class="ml-3">Événements </span>
             </a>
 
-            <a href="#" class="flex items-center px-6 py-3 hover:bg-blue-600 transition">
+            <a href="{{ route('reservation') }}" class="flex items-center px-6 py-3 hover:bg-blue-600 transition">
                 🎫
                 <span class="ml-3">Mes Réservations</span>
             </a>
@@ -81,15 +81,15 @@
 
                 <div class="bg-white rounded-xl shadow p-6">
                     <h3 class="text-gray-500">Mes réservations</h3>
-                    <p class="text-4xl font-bold text-green-600 mt-3">
-
+                    <p class="text-4xl font-bold text-blue-600 mt-3">
+                        {{ $reservations->count() }}
                     </p>
                 </div>
 
                 <div class="bg-white rounded-xl shadow p-6">
                     <h3 class="text-gray-500">Mes tickets</h3>
-                    <p
-                    </p>
+                    <p class="text-4xl font-bold text-blue-600 mt-3">{{  $tickets->count()}}</p>
+
                 </div>
 
             </div>
@@ -148,7 +148,7 @@
                             </td>
                             <td class="text-center">
 
-                                <a href="#"
+                                <a href="{{ route('evenement') }}"
                                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
                                     Réserver
                                 </a>
