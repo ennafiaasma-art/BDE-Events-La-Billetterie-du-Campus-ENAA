@@ -16,7 +16,7 @@
 
         <div>
             <h1 class="text-3xl font-bold text-gray-800">
-                📅 Événements disponibles
+                📅 Événements disponibles pour le moment
             </h1>
 
             <p class="text-gray-500 mt-2">
@@ -37,10 +37,7 @@
 
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
 
-            <img
-                src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=800"
-                class="w-full h-48 object-cover"
-                alt="Event">
+           
 
             <div class="p-6">
 
@@ -81,9 +78,16 @@
 
                 <div class="mt-6">
 
-                    
 
-                    </a>
+
+                    <td class="text-center">
+
+                                <a href="#"
+                                   class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                    Réserver
+                                </a>
+
+                            </td>
 
                 </div>
 

@@ -32,7 +32,7 @@
                 <span class="ml-3">Mes Réservations</span>
             </a>
 
-            <a href="#" class="flex items-center px-6 py-3 hover:bg-blue-600 transition">
+            <a href="{{ route('ticket') }}" class="flex items-center px-6 py-3 hover:bg-blue-600 transition">
                 🎟️
                 <span class="ml-3">Mes Tickets</span>
             </a>

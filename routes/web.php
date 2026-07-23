@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
 
@@ -25,5 +26,6 @@ Route::get('dashboard',function(){
 
     Route::get('dashbordEtu' , [EtudiantController::class,  'dashboard'])->name('dashbordEtu');
     Route::get('evenement' , [EvenementController::class, 'index'])->name('evenement');
+    Route::get('ticket',[TicketController ::class  ,'index'])->name('ticket');
 
 });

@@ -12,6 +12,8 @@ class TicketController extends Controller
      */
     public function index()
     {
+        $tickets=Ticket::with('reservation.evenement')->get();
+        return view('ticket' ,compact('tickets'));
         //
     }
 
