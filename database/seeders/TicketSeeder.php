@@ -10,6 +10,7 @@ class TicketSeeder extends Seeder
     public function run(): void
     {
         Ticket::create([
+             'numero' => 1,
             'code' => 'TKT-2026-0001',
             'reservation_id' => 1,
         ]);

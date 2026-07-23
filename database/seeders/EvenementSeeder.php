@@ -2,28 +2,28 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Evenement;
+use App\Models\User;
 
-class UserSeeder extends Seeder
+class EvenementSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
-        User::create([
-            'nom' => 'Admin',
-            'prenom' => 'BDE',
-            'email' => 'admin@bde.com',
-            'password' => Hash::make('12345678'),
-            'role' => 'admin',
-        ]);
+       $admin = User::where('role', 'admin')->first();
 
-        User::create([
-            'nom' => 'Asma',
-            'prenom' => 'Ennafia',
-            'email' => 'asma@gmail.com',
-            'password' => Hash::make('12345678'),
-            'role' => 'etudiant',
-        ]);
+Evenement::create([
+    'titre' => 'Hackathon BDE 2026',
+    'description' => 'Compétition de développement web entre étudiants.',
+    'date' => '2026-08-15',
+    'lieu' => 'École Numérique Ahmed El Hansali',
+    'capaciteMax' => 100,
+    'admin_id' => $admin->id,
+]);
+
+
     }
 }

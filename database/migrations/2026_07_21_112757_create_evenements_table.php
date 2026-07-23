@@ -18,8 +18,6 @@ return new class extends Migration
 
         $table->date('date');
 
-        $table->time('heure');
-
         $table->string('lieu');
 
         $table->decimal('prix',8,2)->default(0);

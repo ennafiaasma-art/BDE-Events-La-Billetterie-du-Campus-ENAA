@@ -1,9 +1,9 @@
 <?php
 
 namespace Database\Seeders;
-use app\Models\User;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -11,24 +11,19 @@ class UserSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
-        User::create([
-            'nom' => 'Admin',
-            'prenom' => 'BDE',
-            'email' => 'admin@bde.com',
-            'password' => Hash::make('12345678'),
-            'role' => 'admin',
+    public function run(): void{
+        User::updateOrCreate(['email' => 'admin@enaa.ma',],
 
-        ]);
-          User::create([
-            'nom' => 'Asma',
-            'prenom' => 'Ennafia',
-            'email' => 'asma@gmail.com',
-            'password' => Hash::make('12345678'),
-            'role' => 'etudiant',
-        ]);
+        ['name' => 'Administrateur',
+        'password' => Hash::make('password123'),
+        'role' => 'admin',]);
 
-        
-    }
+        User::updateOrCreate(
+    ['email' => 'etudiant@enaa.ma'],
+    [
+        'name' => 'Étudiant Test',
+        'password' => Hash::make('password123'),
+        'role' => 'etudiant',
+    ]
+);}
 }

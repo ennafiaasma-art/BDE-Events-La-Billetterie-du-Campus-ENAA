@@ -18,7 +18,7 @@ $credentials = $request->validate([
 ]);
 if(Auth::attempt($credentials)){
     $request->session()->regenerate();
-    return redirect()->intended('/dashboard');
+    return redirect()->route('dashboard');
 }
 return back()->withErrors([
     'email'=>'Email ou mot de passe incorrect .',
@@ -29,7 +29,7 @@ public function logout(Request $request){
     Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
-    return redirect('/login');
+    return redirect('login');
 }
 
 }
