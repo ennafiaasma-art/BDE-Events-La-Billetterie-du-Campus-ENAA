@@ -18,11 +18,17 @@ $credentials = $request->validate([
 ]);
 if(Auth::attempt($credentials)){
     $request->session()->regenerate();
+    if(auth()->user()->role==='admin'){
     return redirect()->route('dashboard');
+
+}
+return redirect()->route('dashboardEtu');
+
 }
 return back()->withErrors([
     'email'=>'Email ou mot de passe incorrect .',
 ])->onlyInput('email');
+
 
 }
 public function logout(Request $request){

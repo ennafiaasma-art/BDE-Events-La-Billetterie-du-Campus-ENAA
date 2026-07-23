@@ -17,6 +17,13 @@ Route::middleware('auth')->group(function () {
 
 //DAshboard
 
-Route::middleware('auth')->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware('auth')->group(function(){
+
+Route::get('dashboard',function(){
+    return view('dashboard');})->name('dashboard');
+
+    Route::get('dashboardEtu' , function(){
+        return view ('dashboardEtu');
+    })->name('dashboardEtu');
+});
+
