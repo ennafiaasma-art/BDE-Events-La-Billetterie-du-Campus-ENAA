@@ -15,14 +15,14 @@ class Evenement extends Model
         'lieu',
         'prix',
         'capaciteMax',
-        'asdmin_id'
+        'admin_id'
     ];
     public function admin(){
-        return $this->belongsTo(User::class,'admon_id');
+        return $this->belongsTo(User::class,'admin_id');
     }
-    public function reservation(){
+    public function reservations(){
         return $this->hasMany(Reservation::class);
     }
-   
+
     //
 }

@@ -75,7 +75,7 @@
                 <div class="bg-white rounded-xl shadow p-6">
                     <h3 class="text-gray-500">Événements disponibles</h3>
                     <p class="text-4xl font-bold text-blue-600 mt-3">
-                       {{ $evenement->count()}}
+                       {{ $evenements->count()}}
                     </p>
                 </div>
 
@@ -113,6 +113,9 @@
                         <th class="text-left p-4">Date</th>
                         <th class="text-left p-4">Lieu</th>
                         <th class="text-left p-4">Places restantes</th>
+                        <th class="text-left p-4">Description</th>
+
+
                         <th class="text-center p-4">Action</th>
 
                     </tr>
@@ -121,25 +124,28 @@
 
                     <tbody>
 
-
+            @forelse($evenements as $evenement)
 
                         <tr class="border-t hover:bg-gray-50">
 
                             <td class="p-4">
-                                $evenement
+                               {{  $evenement->titre}}
                             </td>
 
-                            <t $evenement
-                            </td>
-
-                            <td class="p-4">
-                             $evenement
+                               <td class="p-4">
+                               {{  $evenement->date}}
                             </td>
 
                             <td class="p-4">
-
+                             {{ $evenement->lieu }}
                             </td>
 
+                            <td class="p-4">
+                            {{ $evenement->capaciteMax }}
+                            </td>
+                              <td class="p-4">
+                            {{ $evenement->description }}
+                            </td>
                             <td class="text-center">
 
                                 <a href="#"
@@ -151,7 +157,7 @@
 
                         </tr>
 
-
+            @empty
 
                         <tr>
 
@@ -173,6 +179,6 @@
     </main>
 
 </div>
-
+@endforelse
 </body>
 </html>

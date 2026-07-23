@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\EvenementController;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\AuthController;
@@ -22,8 +23,6 @@ Route::middleware('auth')->group(function(){
 Route::get('dashboard',function(){
     return view('dashboard');})->name('dashboard');
 
-    Route::get('dashboardEtu' , function(){
-        return view('dashbordEtu');
-    })->name('dashbordEtu');
-});
+    Route::get('dashbordEtu' , [EtudiantController::class,  'dashboard'])->name('dashbordEtu');
 
+});

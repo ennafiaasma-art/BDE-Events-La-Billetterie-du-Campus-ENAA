@@ -12,10 +12,10 @@ class EtudiantController extends Controller
 
     public function dashboard(){
 
-    $evenements=Evenement::whith('reservations')->get();
-    $reservations=Reservation::where('etudient_id',auth()->id())->get();
+    $evenements=Evenement::with('reservations')->get();
+    $reservations=Reservation::where('etudiant_id',auth()->id())->get();
     $tickets=Ticket::whereHas('reservation',function($query){
-        $query->where('etudient_id',auth()->id());
+        $query->where('etudiant_id',auth()->id());
     })->get();
 
     return view('dashbordEtu', compact(

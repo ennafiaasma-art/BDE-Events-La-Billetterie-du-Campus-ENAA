@@ -23,6 +23,14 @@ Evenement::create([
     'capaciteMax' => 100,
     'admin_id' => $admin->id,
 ]);
+Evenement::create([
+    'titre' => 'BDE 2026',
+    'description' => 'Compétition de développement web entre étudiants.',
+    'date' => '2026-08-19',
+    'lieu' => 'École Numérique Ahmed El Hansali',
+    'capaciteMax' => 10,
+    'admin_id' => $admin->id,
+]);
 
 
     }
