@@ -77,6 +77,7 @@ class EvenementController extends Controller
     public function show(Evenement $evenement)
     {
         //
+        $evenement=Evenement::withCount('capaciteMax')->get();
     }
 
     /**

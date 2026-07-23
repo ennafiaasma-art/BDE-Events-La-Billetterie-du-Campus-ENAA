@@ -22,7 +22,7 @@ if(Auth::attempt($credentials)){
     return redirect()->route('dashboard');
 
 }
-return redirect()->route('dashboardEtu');
+return redirect()->route('dashbordEtu');
 
 }
 return back()->withErrors([
