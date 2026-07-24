@@ -15,6 +15,13 @@ class ReservationController extends Controller
       ->get();
       return view('reservation',compact('reservations'));
     }
+    public function adminIndex(){
+        $reservations = Reservation::with(['etudiant', 'evenement', 'ticket'])
+        ->latest()
+        ->get();
+
+    return view('suiveReservation', compact('reservations'));
+    }
 
     public function create()
     {
