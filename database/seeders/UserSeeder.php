@@ -25,5 +25,15 @@ class UserSeeder extends Seeder
         'password' => Hash::make('password123'),
         'role' => 'etudiant',
     ]
-);}
+);
+
+ User::updateOrCreate(
+    ['email' => 'asmaenn@gmail.com'],
+    [
+        'name' => 'Étudiant Test',
+        'password' => Hash::make('asma123'),
+        'role' => 'etudiant',
+    ]
+);
+}
 }

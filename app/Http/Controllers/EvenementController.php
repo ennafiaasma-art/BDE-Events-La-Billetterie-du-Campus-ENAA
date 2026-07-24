@@ -13,6 +13,8 @@ class EvenementController extends Controller
      */
    public function index()
 {
+
+   
     $evenements = Evenement::with('reservations')->orderBy('date','asc')->get();
     $reservations = Reservation::where('etudiant_id', auth()->id())->get();
 
@@ -29,7 +31,7 @@ class EvenementController extends Controller
         abort(403);
     }
 
-    return view('admin.evenements.create');
+    return view('gererEnv.create');
         //
     }
 

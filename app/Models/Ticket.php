@@ -9,7 +9,7 @@ class Ticket extends Model
     protected $fillable=[
         'code',
         'numero',
-        'resevation_id',
+        'reservation_id',
 
     ];
     public function reservation(){

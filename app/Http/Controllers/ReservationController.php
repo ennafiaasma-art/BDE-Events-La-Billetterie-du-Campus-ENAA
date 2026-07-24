@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -31,14 +32,23 @@ class ReservationController extends Controller
         return back()->with('error', 'Vous avez déjà réservé cet événement.');
     }
 
-    Reservation::create([
+    $reservation=Reservation::create([
         'codeReservation' => 'BDE-' . time(),
         'dateReservation' => now(),
         'evenement_id' => $evenement_id,
         'etudiant_id' => auth()->id(),
     ]);
+    // creer automatiquement les ticket
+   $numero = 'TICKET-' . rand(1000, 9999);
+$code = uniqid();
 
-    return back()->with('success', 'Réservation effectuée avec succès.');
+Ticket::create([
+    'numero' => $numero,
+    'code' => $code,
+    'reservation_id' => $reservation->id,
+]);
+
+    return redirect()->route('ticket')->with('success', 'Réservation effectuée avec succès.');
 }
 
 

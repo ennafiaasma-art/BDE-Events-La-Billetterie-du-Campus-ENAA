@@ -10,12 +10,16 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $tickets=Ticket::with('reservation.evenement')->get();
-        return view('ticket' ,compact('tickets'));
-        //
-    }
+   public function index()
+{
+    $tickets = Ticket::with('reservation.evenement')
+        ->whereHas('reservation', function ($query) {
+            $query->where('etudiant_id', auth()->id());
+        })
+        ->get();
+
+    return view('ticket', compact('tickets'));
+}
 
     /**
      * Show the form for creating a new resource.
