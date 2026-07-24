@@ -73,6 +73,14 @@
                                 {{ $evenement->capaciteMax - $evenement->reservations->count() }}
                                 places restantes
                             </p>
+                            <br>
+                            <br>
+                            @if(auth()->user()->role == 'admin')
+    <a href="{{ route('gererEnv.edit', $evenement->id) }}"
+       class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">
+        Modifier
+    </a>
+@endif
 
                         </div>
 

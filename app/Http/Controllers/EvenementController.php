@@ -14,7 +14,7 @@ class EvenementController extends Controller
    public function index()
 {
 
-   
+
     $evenements = Evenement::with('reservations')->orderBy('date','asc')->get();
     $reservations = Reservation::where('etudiant_id', auth()->id())->get();
 
@@ -87,7 +87,7 @@ class EvenementController extends Controller
         if(auth()->user()->role != 'admin'){
             abort(403);
         }
-        return view('admin.evenements.edit' , compact('evenement'));
+        return view('gererEnv.edit' , compact('evenement'));
     }
 
     /**
@@ -106,7 +106,14 @@ class EvenementController extends Controller
             'prix' => 'required|numeric|min:0',
             'capaciteMax' => 'required|integer|min:1',
         ]);
-        $evenement->update($data);
+        $evenement->update([
+            'titre'=>$request->titre,
+            'description'=>$request->description,
+            'date'=>$request->date,
+            'lieu'=>$request->lieu,
+            'capaciteMax' => $request->capaciteMax,
+            'prix' => $request->prix,
+        ]);
         return redirect()
         ->route('evenement')
         ->with('success','evenement modifie avec succes' );

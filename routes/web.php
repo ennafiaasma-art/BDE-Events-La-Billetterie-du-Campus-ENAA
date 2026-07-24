@@ -32,8 +32,12 @@ Route::get('dashboard',function(){
 Route::get('/gererEnv/create', [EvenementController::class, 'create'])
     ->name('gererEnv.create');
       // Enregistrer un événement
-    Route::post('/gererEnv', [EvenementController::class, 'store'])
-        ->name('gererEnv.store');});
+Route::post('/gererEnv', [EvenementController::class, 'store'])
+        ->name('gererEnv.store');
+
+Route::get('/gererEnv/{evenement}/edit', [EvenementController::class , 'edit'])->name('gererEnv.edit');
+Route::put('/gererEnv/{evenement}', [EvenementController::class , 'update'])->name('gererEnv.update');
+        });
 
 
 
