@@ -80,6 +80,20 @@
        class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">
         Modifier
     </a>
+      <form action="{{ route('gererEnv.destroy', $evenement->id) }}"
+          method="POST"
+          class="inline"
+          onsubmit="return confirm('Voulez-vous vraiment supprimer cet événement ?')">
+
+        @csrf
+        @method('DELETE')
+
+        <button
+            class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
+            Supprimer
+        </button>
+
+    </form>
 @endif
 
                         </div>

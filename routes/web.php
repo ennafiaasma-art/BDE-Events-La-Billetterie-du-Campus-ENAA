@@ -37,6 +37,7 @@ Route::post('/gererEnv', [EvenementController::class, 'store'])
 
 Route::get('/gererEnv/{evenement}/edit', [EvenementController::class , 'edit'])->name('gererEnv.edit');
 Route::put('/gererEnv/{evenement}', [EvenementController::class , 'update'])->name('gererEnv.update');
+Route::delete('gererEnv/{evenement}', [EvenementController::class , 'destroy'])->name('gererEnv.destroy');
         });
 
 
