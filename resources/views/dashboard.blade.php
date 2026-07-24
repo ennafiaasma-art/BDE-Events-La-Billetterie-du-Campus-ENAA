@@ -45,12 +45,7 @@
                     Tickets
                 </a>
 
-                <a href="#" class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 100-8 4 4 0 000 8zm6 4v-1a4 4 0 00-3-3.87m-9 0A4 4 0 003 19v1"/>
-                    </svg>
-                    Utilisateurs
-                </a>
+
             </nav>
 
             <div class="px-4 py-6 border-t border-gray-200">
@@ -101,7 +96,7 @@
                     <div class="bg-white rounded-xl shadow-lg p-6 flex items-center justify-between">
                         <div>
                             <p class="text-sm text-gray-500">Événements</p>
-                            <p class="text-2xl font-bold text-gray-800 mt-1">12</p>
+                            <p class="text-2xl font-bold text-gray-800 mt-1">245</p>
                         </div>
                         <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -113,7 +108,7 @@
                     <div class="bg-white rounded-xl shadow-lg p-6 flex items-center justify-between">
                         <div>
                             <p class="text-sm text-gray-500">Réservations</p>
-                            <p class="text-2xl font-bold text-gray-800 mt-1">145</p>
+                            <p class="text-2xl font-bold text-gray-800 mt-1">134</p>
                         </div>
                         <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -125,7 +120,7 @@
                     <div class="bg-white rounded-xl shadow-lg p-6 flex items-center justify-between">
                         <div>
                             <p class="text-sm text-gray-500">Tickets</p>
-                            <p class="text-2xl font-bold text-gray-800 mt-1">15</p>
+                            <p class="text-2xl font-bold text-gray-800 mt-1">23</p>
                         </div>
                         <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

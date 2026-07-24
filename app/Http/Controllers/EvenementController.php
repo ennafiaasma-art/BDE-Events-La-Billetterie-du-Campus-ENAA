@@ -13,14 +13,14 @@ class EvenementController extends Controller
      */
    public function index()
 {
-    $evenements = Evenement::with('reservations')->get();
-        $reservations = Reservation::where('etudiant_id', auth()->id())->get();
+    $evenements = Evenement::with('reservations')->orderBy('date','asc')->get();
+    $reservations = Reservation::where('etudiant_id', auth()->id())->get();
 
     return view('evenement', compact('evenements','reservations'));
 }
 
     /**
-     * Show the form for creating a new resource.
+     * afficher la formulaire de creation.
      */
     public function create()
     {
@@ -34,7 +34,7 @@ class EvenementController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * enregistrer un nouvel evenements
      */
     public function store(Request $request)
     {
@@ -42,67 +42,86 @@ class EvenementController extends Controller
     {
         abort(403);
     }
-     $request->validate([
+    $data= $request->validate([
 
-        'titre'=>'required',
-        'description'=>'required',
+        'titre'=>'required |string|max:255',
+        'description'=>'required |string',
         'date'=>'required|date',
-        'lieu'=>'required',
+        'lieu'=>'required |string|max:255',
         'prix'=>'required|numeric|min:0',
         'capaciteMax'=>'required|integer|min:1'
 
     ]);
-    Evenement::create([
+    $data['admin_id']=auth()->id();
+    Evenement::create($data);
+    return redirect()
+    ->route('evenement')
+    ->with('success','evenements crée avec succés');
+    }
 
-        'titre'=>$request->titre,
-        'description'=>$request->description,
-        'date'=>$request->date,
-        'lieu'=>$request->lieu,
-        'prix'=>$request->prix,
-        'capaciteMax'=>$request->capaciteMax,
 
-        'admin_id'=>auth()->id()
 
-    ]);
 
-    return redirect()->route('evenements.index')
-                     ->with('success','Événement créé avec succès');
-}
+
+
 
         //
 
 
     /**
-     * Display the specified resource.
+     * afficher un evenements.
      */
     public function show(Evenement $evenement)
     {
         //
-        $evenement=Evenement::withCount('capaciteMax')->get();
+        return view('admin.evenements.show' , compact('evenement'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * formailaire de modification
      */
     public function edit(Evenement $evenement)
     {
-        //
+        if(auth()->user()->role != 'admin'){
+            abort(403);
+        }
+        return view('admin.evenements.edit' , compact('evenement'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * mattre a joure un evenement;
      */
     public function update(Request $request, Evenement $evenement)
     {
-        //
+        if(auth()->user()->role !='admin'){
+            abort(403);
+        }
+        $data=$request->validate( [
+            'titre' => 'required|string|max:255',
+            'description' => 'required|string',
+            'date' => 'required|date',
+            'lieu' => 'required|string|max:255',
+            'prix' => 'required|numeric|min:0',
+            'capaciteMax' => 'required|integer|min:1',
+        ]);
+        $evenement->update($data);
+        return redirect()
+        ->route('evenement')
+        ->with('success','evenement modifie avec succes' );
     }
 
     /**
-     * Remove the specified resource from storage.
+     * supprimer un evenenemnt:
      */
     public function destroy(Evenement $evenement)
     {
-        //
+        if(auth()->user()->role != 'admin'){
+            abort(403);
+        }
+       $evenement->delete();
+       return redirect()
+       ->route('evenement')
+       ->with('succes' , 'evenement supprimer avec succés');
     }
 
 }
