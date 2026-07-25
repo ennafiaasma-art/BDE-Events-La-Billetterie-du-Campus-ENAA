@@ -85,54 +85,9 @@
                     </div>
                 </section>
 
-                {{-- Stat cards (valeurs fictives) --}}
-                <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+           
 
-                    <div class="bg-white rounded-xl shadow-lg p-6 flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-500">Événements</p>
-                            <p class="text-2xl font-bold text-gray-800 mt-1">245</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3M3 11h18M5 5h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/>
-                            </svg>
-                        </div>
-                    </div>
 
-                    <div class="bg-white rounded-xl shadow-lg p-6 flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-500">Réservations</p>
-                            <p class="text-2xl font-bold text-gray-800 mt-1">134</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-xl shadow-lg p-6 flex items-center justify-between">
-
-                        <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-xl shadow-lg p-6 flex items-center justify-between">
-                        <div>
-                            <p class="text-sm text-gray-500">Étudiants</p>
-                            <p class="text-2xl font-bold text-gray-800 mt-1">{{ auth()->user()->count() }}</p>
-                        </div>
-                        <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 100-8 4 4 0 000 8zm6 4v-1a4 4 0 00-3-3.87m-9 0A4 4 0 003 19v1"/>
-                            </svg>
-                        </div>
-                    </div>
-                </section>
 
                 {{-- Espace selon rôle (logique originale conservée) --}}
                 @if(auth()->user()->role == 'admin')
@@ -140,7 +95,7 @@
                     <section class="bg-white rounded-xl shadow-lg p-6">
                         <h2 class="text-lg font-semibold text-gray-800 mb-4">Espace Administrateur</h2>
 
-                        <a href=""
+                        <a href="{{ route('evenements.index') }}"
                            class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-medium text-white shadow hover:bg-blue-700 transition">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3M3 11h18M5 5h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/>
