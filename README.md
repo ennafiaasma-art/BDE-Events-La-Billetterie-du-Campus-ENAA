@@ -68,3 +68,314 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 =======
 # BDE-Events-La-Billetterie-du-Campus-ENAA
 >>>>>>> 975711ed57797ce768f1757cdfb9e9dc2e56c53c
+  
+
+
+
+
+
+  # 🎫 BDE-Events - La Billetterie du Campus ENAA
+
+## 📌 Description
+
+**BDE-Events** est une plateforme web développée avec **Laravel 12** permettant au Bureau des Étudiants (BDE) de gérer les événements du campus ENAA.
+
+La plateforme offre un espace d'administration permettant de créer et gérer les événements ainsi qu'un espace étudiant où les utilisateurs peuvent réserver leur place, consulter leurs billets numériques et obtenir un pass unique pour chaque réservation.
+
+---
+
+# 🎯 Objectifs du projet
+
+- Digitaliser la gestion des événements du campus.
+- Simplifier le processus de réservation des étudiants.
+- Générer automatiquement un billet numérique unique.
+- Fournir un tableau de bord pour le suivi des réservations.
+
+---
+
+# 🚀 Fonctionnalités
+
+## 👨‍💼 Administration (BDE)
+
+- Authentification administrateur
+- Création d'événements
+- Modification d'événements
+- Suppression d'événements
+- Gestion de la capacité maximale
+- Visualisation du nombre de réservations
+- Suivi des places restantes
+
+---
+
+## 👨‍🎓 Espace Étudiant
+
+- Inscription
+- Connexion
+- Consultation des événements disponibles
+- Réservation d'un événement gratuit
+- Empêcher la double réservation
+- Consultation de l'historique des réservations
+
+---
+
+## 🎟️ Gestion des Tickets
+
+Après une réservation, le système génère automatiquement :
+
+- Un numéro de réservation unique
+- Un billet numérique (Pass Étudiant)
+
+Le ticket contient :
+
+- Nom de l'étudiant
+- Titre de l'événement
+- Date
+- Heure
+- Lieu
+- Code de réservation
+
+Exemple :
+
+```
+BDE-2026-8F4A92
+```
+
+---
+
+# 📚 User Stories
+
+## Épic 1 : Gestion des événements
+
+### US 1.1
+
+Créer un événement avec :
+
+- Titre
+- Description
+- Date
+- Heure
+- Lieu
+- Prix
+- Capacité maximale
+
+### US 1.2
+
+Consulter en temps réel :
+
+- Nombre de réservations
+- Places restantes
+
+---
+
+## Épic 2 : Réservation
+
+### US 2.1
+
+Un étudiant peut :
+
+- réserver un événement gratuit
+- uniquement si celui-ci n'est pas complet
+- une seule réservation par événement
+
+---
+
+## Épic 3 : Génération du Pass
+
+### US 3.1
+
+Chaque étudiant peut consulter son espace **Mes Billets** contenant son ticket numérique.
+
+---
+
+# 🏗️ Architecture
+
+```
+Laravel
+│
+├── Models
+│   ├── User
+│   ├── Evenement
+│   ├── Reservation
+│   └── Ticket
+│
+├── Controllers
+│   ├── AuthController
+│   ├── EvenementController
+│   ├── ReservationController
+│   └── TicketController
+│
+├── Migrations
+├── Seeders
+├── Blade Views
+└── Routes
+```
+
+---
+
+# 🛠️ Technologies utilisées
+
+- Laravel 12
+- PHP 8.4
+- MySQL
+- Blade
+- Bootstrap / Tailwind CSS
+- Laravel Eloquent ORM
+- Git & GitHub
+- Docker
+- Swagger (Documentation API)
+
+---
+
+# 📂 Base de données
+
+Les principales tables sont :
+
+- users
+- evenements
+- reservations
+- tickets
+
+Relations :
+
+```
+User
+  │
+  ├── possède plusieurs Reservations
+  │
+Reservation
+  │
+  ├── appartient à un User
+  ├── appartient à un Evenement
+  └── possède un Ticket
+
+Evenement
+  │
+  └── possède plusieurs Reservations
+```
+
+---
+
+# 🔐 Rôles
+
+## Administrateur (BDE)
+
+- Gestion des événements
+- Consultation des réservations
+- Suivi des capacités
+
+## Étudiant
+
+- Réserver un événement
+- Consulter ses billets
+- Télécharger son pass
+
+---
+
+# ⚙️ Installation
+
+## Cloner le projet
+
+```bash
+git clone https://github.com/votre-utilisateur/BDE-Events.git
+```
+
+Entrer dans le dossier
+
+```bash
+cd BDE-Events
+```
+
+Installer les dépendances
+
+```bash
+composer install
+```
+
+Copier le fichier d'environnement
+
+```bash
+cp .env.example .env
+```
+
+Générer la clé de l'application
+
+```bash
+php artisan key:generate
+```
+
+Configurer la base de données dans `.env`
+
+Puis exécuter :
+
+```bash
+php artisan migrate
+```
+
+Lancer le serveur
+
+```bash
+php artisan serve
+```
+
+---
+
+# 📖 Documentation API
+
+La documentation Swagger est disponible à l'adresse :
+
+```
+http://localhost:8000/api/documentation
+```
+
+---
+
+# 📁 Structure du projet
+
+```
+app/
+database/
+routes/
+resources/views/
+public/
+storage/
+```
+
+---
+
+# 📸 Captures d'écran
+
+À ajouter :
+
+- Tableau de bord administrateur
+- Liste des événements
+- Réservation
+- Mes billets
+- Ticket numérique
+
+---
+
+# 👨‍💻 Auteur
+
+**Asma Ennafia**
+
+Étudiante en Développement Web 
+
+École Numérique Ahmed El Hansali (ENAA)
+
+---
+
+# 📄 Licence
+
+Projet réalisé dans le cadre de la formation **Développeur Web **.
+
+---
+
+# ✅ Améliorations futures
+
+- Paiement en ligne
+- QR Code sur les tickets
+- Notifications par email
+- Tableau de bord analytique
+- Export PDF des billets
+- Recherche et filtres des événements
+- Application mobile
