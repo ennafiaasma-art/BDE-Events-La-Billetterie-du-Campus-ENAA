@@ -38,7 +38,7 @@ class EvenementController extends Controller
     /**
      * enregistrer un nouvel evenements
      */
-    public function store(Request $request)
+    public function store(Request $request )
     {
         if(auth()->user()->role != "admin")
     {

@@ -53,8 +53,10 @@ Route::middleware('auth')->group(function(){
     // mes ticket
     Route::get('ticket',[TicketController ::class  ,'index'])->name('ticket');
 //    reservation un evenement
-    Route::post('reservations{evenement}', [ReservationController::class, 'store'])
+    Route::post('/reservations{evenement}', [ReservationController::class, 'store'])
     ->name('reservations.store');
+    Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])
+    ->name('reservations.destroy');
 
 // mes reservation
     Route::get('reservation',[ReservationController::class ,'index'])->name('reservation');

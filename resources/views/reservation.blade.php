@@ -39,6 +39,7 @@
                     <th class="p-4 text-left">Lieu</th>
                     <th class="p-4 text-left">Date réservation</th>
                     <th class="p-4 text-center">Statut</th>
+                    <th class="p-4 text-center">Action</th>
                 </tr>
 
             </thead>
@@ -74,6 +75,20 @@
                             Confirmée
                         </span>
                     </td>
+                    <td class="p-4 text-center">
+    <form action="{{ route('reservations.destroy', $reservation->id) }}"
+          method="POST"
+          onsubmit="return confirm('Voulez-vous vraiment annuler cette réservation ?')">
+
+        @csrf
+        @method('DELETE')
+
+        <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
+            Annuler
+        </button>
+
+    </form>
+</td>
 
                 </tr>
 

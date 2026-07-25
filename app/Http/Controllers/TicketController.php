@@ -18,6 +18,7 @@ class TicketController extends Controller
         })
         ->get();
 
+
     return view('ticket', compact('tickets'));
 }
 

@@ -11,15 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tickets', function (Blueprint $table) {
-            $table->id();
-            $table->string('numero');
-             $table->string('code')->unique();
-
-        $table->foreignId('reservation_id')
-              ->constrained()
-              ->cascadeOnDelete();
-            $table->timestamps();
+        Schema::table('tickets', function (Blueprint $table) {
+            //
         });
     }
 
@@ -28,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tickets');
+        Schema::table('tickets', function (Blueprint $table) {
+            //
+        });
     }
 };

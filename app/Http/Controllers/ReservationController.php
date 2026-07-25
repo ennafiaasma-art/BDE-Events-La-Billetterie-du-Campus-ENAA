@@ -29,7 +29,7 @@ class ReservationController extends Controller
     }
 
 
-       public function store(Request $request, $evenement_id)
+       public function store( $evenement_id)
 {
     $existe = Reservation::where('etudiant_id', auth()->id())
         ->where('evenement_id', $evenement_id)
@@ -49,7 +49,7 @@ class ReservationController extends Controller
    $numero = 'TICKET-' . rand(1000, 9999);
 $code = uniqid();
 
-Ticket::create([
+$ticket=Ticket::create([
     'numero' => $numero,
     'code' => $code,
     'reservation_id' => $reservation->id,
@@ -76,6 +76,16 @@ Ticket::create([
 
     public function destroy(Reservation $reservation)
     {
+
+      if ($reservation->etudiant_id != auth()->id()) {
+        abort(403);
+    }
+     if ($reservation->ticket) {
+        $reservation->ticket->delete();
+    }
+    $reservation->delete();
+    return redirect()->route('reservation')
+        ->with('success', 'Réservation annulée avec succès.');
         //
     }
 }

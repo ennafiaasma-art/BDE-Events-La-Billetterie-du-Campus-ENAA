@@ -149,6 +149,18 @@
                                     </td>
                                     <td class="text-center">
                                         @if(auth()->user()->role == 'etudiant')
+                                        @php
+    $dejaReserve = $reservations->contains('evenement_id', $evenement->id);
+@endphp
+
+@if($dejaReserve)
+
+    <button
+        class="bg-gray-500 text-white px-4 py-2 rounded cursor-not-allowed"
+        disabled>
+        Déjà réservé
+    </button>
+    @else
 
                                         <form action="{{ route('reservations.store', $evenement->id) }}" method="POST">
                                             @csrf
@@ -156,7 +168,9 @@
                                             <button class="bg-blue-600 text-white px-4 py-2 rounded">
                                                 Réserver
                                             </button>
+
                                         </form>
+                                @endif
                                 @endif
                                     </td>
 
@@ -171,7 +185,7 @@
                                                             </td>
 
                                                         </tr>
-
+                                                     @endforelse
 
                                                     </tbody>
 
@@ -184,7 +198,7 @@
                                     </main>
 
                                 </div>
-                            @endforelse
+
 </body>
 
 </html>
