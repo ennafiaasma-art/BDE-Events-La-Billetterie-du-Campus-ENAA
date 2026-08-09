@@ -9,3 +9,8 @@ Route::post('/logout', [AuthentificationController::class, 'logout']);
 
 Route::get('/evenements', [EvenementController::class, 'index']);
 Route::post('/evenements', [EvenementController::class, 'store']);
+
+
+Route::post('/evenements', [EvenementController::class, 'store']);
+Route::put('/evenements/{id}', [EvenementController::class, 'update']);
+Route::delete('/evenements/{id}', [EvenementController::class, 'destroy']);
