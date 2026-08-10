@@ -1,10 +1,14 @@
-import Events from "./pages/Events";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
 
 function App() {
     return (
-        <div>
-            <Events />
-        </div>
+        <BrowserRouter>
+        <Routes>
+            <Route path="/login" element={<Login/>}/>
+        </Routes>
+        </BrowserRouter>
+
     );
 }
 
