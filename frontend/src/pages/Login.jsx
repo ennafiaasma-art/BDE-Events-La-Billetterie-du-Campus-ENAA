@@ -59,7 +59,7 @@ function Login() {
                 {/* Logo */}
                 <div className="flex items-center gap-3">
                     <div className="w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center text-2xl">
-                        🎟️
+                      
                     </div>
 
                     <span className="text-2xl font-bold">
