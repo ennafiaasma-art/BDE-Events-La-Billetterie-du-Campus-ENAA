@@ -95,7 +95,7 @@ class ReservationController extends Controller
     }
 
     // 5. Supprimer une réservation
-    public function destroy($id)
+    public function destroy( Request $request,$id)
     {
         $reservation = Reservation::find($id);
 
@@ -105,6 +105,15 @@ class ReservationController extends Controller
                 'message' => 'Réservation introuvable'
             ], 404);
         }
+         if ($reservation->etudiant_id != $request->user()->id) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Vous n\'êtes pas autorisé à annuler cette réservation'
+        ], 403);
+    }
+     if ($reservation->ticket) {
+        $reservation->ticket->delete();
+    }
 
         $reservation->delete();
 

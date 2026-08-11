@@ -28,8 +28,14 @@ Route::get('/reservations', [ReservationController::class, 'index']);
 Route::get('/reservations/{id}', [ReservationController::class, 'show']);
 Route::post('/reservations', [ReservationController::class, 'store']);
 Route::put('/reservations/{id}', [ReservationController::class, 'update']);
-Route::delete('/reservations/{id}', [ReservationController::class, 'destroy']);
 
+
+// annuller une resrvation
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('/mes-reservations', [ReservationController::class,'mesReservations']);
+
+    Route::delete('/reservations/{id}', [ReservationController::class, 'destroy']);});
 
 
 

@@ -5,7 +5,7 @@ function MyReservations() {
     const [reservations, setReservations] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-
+    const [deletingId, setDeletingId] = useState(null);
     useEffect(() => {
         getReservations();
     }, []);
@@ -30,6 +30,40 @@ function MyReservations() {
             setLoading(false);
         }
     };
+    const cancelReservation = async (id) => {
+
+    const confirmed = window.confirm(
+        "Êtes-vous sûr de vouloir annuler cette réservation ?"
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+
+        setDeletingId(id);
+
+        await api.delete(`/reservations/${id}`);
+
+        // Retirer la réservation de l'affichage
+        setReservations((prev) =>
+            prev.filter((reservation) => reservation.id !== id)
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            error.response?.data?.message ||
+            "Impossible d'annuler la réservation."
+        );
+
+    } finally {
+        setDeletingId(null);
+    }
+};
 
     return (
         <div className="min-h-screen bg-slate-100">
@@ -170,9 +204,20 @@ function MyReservations() {
                                             <span>
                                                 {reservation.codeReservation}
                                             </span>
+
+
                                         </div>
 
                                     </div>
+                                    <button
+    onClick={() => cancelReservation(reservation.id)}
+    disabled={deletingId === reservation.id}
+    className="mt-5 w-full py-3 rounded-xl border border-red-200 text-red-600 font-semibold hover:bg-red-50 transition disabled:opacity-50"
+>
+    {deletingId === reservation.id
+        ? "Annulation..."
+        : "Annuler la réservation"}
+</button>
 
                                 </div>
 
