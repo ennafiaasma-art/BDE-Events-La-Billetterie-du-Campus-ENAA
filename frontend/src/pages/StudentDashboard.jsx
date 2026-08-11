@@ -52,7 +52,7 @@ function StudentDashboard() {
                 evenement_id: evenementId,
                 etudiant_id: user.id,
                 codeReservation: "BDE-" + Date.now(),
-                dateReservation: new Date().toISOString(),
+               dateReservation: new Date().toISOString().split("T")[0],
             });
 
             setMessage("Réservation effectuée avec succès !");
