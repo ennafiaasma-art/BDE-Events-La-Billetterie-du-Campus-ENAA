@@ -18,6 +18,12 @@ Route::post('/evenements', [EvenementController::class, 'store']);
 Route::put('/evenements/{id}', [EvenementController::class, 'update']);
 Route::delete('/evenements/{id}', [EvenementController::class, 'destroy']);
 
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get( '/mes-reservations', [ReservationController::class, 'mesReservations']
+    );
+
+});
 Route::get('/reservations', [ReservationController::class, 'index']);
 Route::get('/reservations/{id}', [ReservationController::class, 'show']);
 Route::post('/reservations', [ReservationController::class, 'store']);

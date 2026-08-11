@@ -51,7 +51,7 @@ class ReservationController extends Controller
             'codeReservation' => $request->codeReservation,
             'dateReservation' => $request->dateReservation,
             'evenement_id' => $request->evenement_id,
-            'etudiant_id' => $request->etudiant_id,
+            'etudiant_id' => $request->user()->id,
         ]);
 
         return response()->json([
@@ -77,7 +77,7 @@ class ReservationController extends Controller
             'codeReservation' => 'sometimes|string|unique:reservations,codeReservation,' . $id,
             'dateReservation' => 'sometimes|date',
             'evenement_id' => 'sometimes|exists:evenements,id',
-            'etudiant_id' => 'sometimes|exists:users,id',
+'etudiant_id' => $request->user()->id,
         ]);
 
         $reservation->update($request->only([
@@ -113,4 +113,17 @@ class ReservationController extends Controller
             'message' => 'Réservation supprimée avec succès'
         ], 200);
     }
+   public function mesReservations(Request $request)
+{
+    $reservations = Reservation::with('evenement')
+        ->where('etudiant_id', $request->user()->id)
+        ->latest()
+        ->get();
+
+    return response()->json([
+        'success' => true,
+        'data' => $reservations
+    ], 200);
+
+}
 }

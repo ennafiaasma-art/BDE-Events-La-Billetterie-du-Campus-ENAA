@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 function Login() {
@@ -7,30 +8,47 @@ function Login() {
     const [message, setMessage] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
+   const handleLogin = async (e) => {
+    e.preventDefault();
 
-        setMessage("");
-        setLoading(true);
+    setMessage("");
+    setLoading(true);
 
-        try {
-            const response = await api.post("/login", {
-                email,
-                password,
-            });
+    try {
+        const response = await api.post("/login", {
+            email,
+            password,
+        });
 
-            console.log(response.data);
+        console.log(response.data);
 
-            setMessage("Connexion réussie !");
-        } catch (error) {
-            console.error(error);
+        localStorage.setItem("token", response.data.token);
 
-            setMessage("Email ou mot de passe incorrect.");
-        } finally {
-            setLoading(false);
-        }
-    };
+        localStorage.setItem(
+            "user",
+            JSON.stringify(response.data.user)
+        );
+
+        setMessage("Connexion réussie !");
+
+        setTimeout(() => {
+            navigate("/dashboard");
+        }, 500);
+
+    } catch (error) {
+        console.error(error);
+
+        setMessage(
+            error.response?.data?.message ||
+            "Email ou mot de passe incorrect."
+        );
+
+    } finally {
+        setLoading(false);
+    }
+};
 
     return (
         <div className="min-h-screen flex bg-slate-50">

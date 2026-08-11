@@ -21,18 +21,23 @@ class AuthentificationController extends Controller
         }
 
         $user = Auth::user();
+         $token = $user->createToken('react-token')->plainTextToken;
+
 
         return response()->json([
+             'success' => true,
             'message' => 'Connexion réussie',
             'user' => $user,
-        ]);
+            'token' => $token,
+        ],200);
     }
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        $request->user()->currentAccessToken()?->delete();
 
         return response()->json([
+            'success' => true,
             'message' => 'Déconnexion réussie'
         ]);
     }

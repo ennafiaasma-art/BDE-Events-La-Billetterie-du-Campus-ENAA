@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
+
 function StudentDashboard() {
+    const navigate = useNavigate();
     return (
         <div className="min-h-screen bg-slate-100">
 
@@ -61,17 +65,17 @@ function StudentDashboard() {
                             🎟️
                         </div>
 
-                        <h3 className="text-xl font-bold text-slate-800">
-                            Mes réservations
-                        </h3>
-
+               
                         <p className="text-slate-500 mt-2">
                             Consultez vos réservations.
                         </p>
 
-                        <button className="mt-5 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                            Mes réservations
-                        </button>
+                               <button
+    onClick={() => navigate("/reservations")}
+    className="mt-5 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+>
+    Mes réservations
+</button>
                     </div>
 
                     <div className="bg-white p-6 rounded-2xl shadow-sm">
