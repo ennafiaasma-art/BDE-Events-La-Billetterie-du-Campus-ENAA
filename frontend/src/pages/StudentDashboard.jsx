@@ -42,10 +42,6 @@ function StudentDashboard() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
 
                     <div className="bg-white p-6 rounded-2xl shadow-sm">
-                        <div className="text-3xl mb-4">
-                            🎉
-                        </div>
-
                         <h3 className="text-xl font-bold text-slate-800">
                             Événements
                         </h3>
@@ -61,27 +57,21 @@ function StudentDashboard() {
                     </div>
 
                     <div className="bg-white p-6 rounded-2xl shadow-sm">
-                        <div className="text-3xl mb-4">
-                            🎟️
-                        </div>
-
-               
+                        <h3 className="text-xl font-bold text-slate-800">
+                           Réservations
+                        </h3>
                         <p className="text-slate-500 mt-2">
                             Consultez vos réservations.
                         </p>
 
-                               <button
-    onClick={() => navigate("/reservations")}
-    className="mt-5 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
->
-    Mes réservations
-</button>
+                        <button onClick={() => navigate("/reservations")}
+                        className="mt-5 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                         Mes réservations
+                       </button>
                     </div>
 
                     <div className="bg-white p-6 rounded-2xl shadow-sm">
-                        <div className="text-3xl mb-4">
-                            🎫
-                        </div>
+
 
                         <h3 className="text-xl font-bold text-slate-800">
                             Mes tickets

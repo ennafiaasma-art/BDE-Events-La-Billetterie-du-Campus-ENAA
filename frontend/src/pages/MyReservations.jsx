@@ -73,7 +73,7 @@ function MyReservations() {
                 <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
                     <h1 className="text-2xl font-bold text-blue-600">
-                        🎟️ BDE Events
+                         BDE Events
                     </h1>
 
                     <span className="text-sm text-slate-500">
@@ -88,7 +88,7 @@ function MyReservations() {
 
                 <div className="mb-8">
                     <h2 className="text-3xl font-bold text-slate-800">
-                        Mes réservations 🎟️
+                        Mes réservations
                     </h2>
 
                     <p className="mt-2 text-slate-500">
@@ -100,7 +100,7 @@ function MyReservations() {
                 {loading && (
                     <div className="bg-white rounded-2xl p-10 text-center shadow-sm">
                         <div className="text-4xl animate-pulse">
-                            🎟️
+
                         </div>
 
                         <p className="mt-4 text-slate-500">
@@ -199,7 +199,6 @@ function MyReservations() {
                                         </div>
 
                                         <div className="flex gap-3">
-                                            <span>🎟️</span>
 
                                             <span>
                                                 {reservation.codeReservation}
