@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Events from "./pages/Events";
 import StudentDashboard from "./pages/StudentDashboard";
 import MyReservations from "./pages/MyReservations";
+import MyTickets from "./pages/MyTicket";
 
 function App() {
     return (
@@ -13,6 +14,8 @@ function App() {
                 <Route path="/dashboard" element={<StudentDashboard />} />
                  <Route path="/reservations" element={<MyReservations />} />
                 <Route path="/evenements" element={<Events />} />
+                  <Route path="/tickets" element={<MyTickets />}
+                />
             </Routes>
         </BrowserRouter>
     );

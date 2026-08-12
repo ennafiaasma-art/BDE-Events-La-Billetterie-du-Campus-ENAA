@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import MyTickets from "./MyTicket";
 
 function StudentDashboard() {
     const navigate = useNavigate();
@@ -9,6 +10,7 @@ function StudentDashboard() {
 
     const [evenements, setEvenements] = useState([]);
     const [reservations, setReservations] = useState([]);
+    const [tickets , setTickets]=useState([]);
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState("");
 
@@ -72,6 +74,25 @@ function StudentDashboard() {
             }
         }
     };
+    useEffect(() => {
+    getTickets();
+}, []);
+
+const getTickets = async () => {
+    try {
+        const response = await api.get("/tickets");
+
+        console.log("Tickets :", response.data);
+
+        setTickets(response.data.data || []);
+
+    } catch (error) {
+        console.error("Erreur récupération tickets :", error);
+        setTickets([]);
+    } finally {
+        setLoadingTickets(false);
+    }
+};
 
     // Déconnexion
     const logout = async () => {
@@ -124,22 +145,16 @@ function StudentDashboard() {
 
                     <button
                         onClick={() => navigate("/reservations")}
-                        className="w-full flex items-center px-6 py-3 hover:bg-blue-600 transition"
-                    >
+                        className="w-full flex items-center px-6 py-3 hover:bg-blue-600 transition">
 
                         <span className="ml-3">
                             Mes Réservations
                         </span>
                     </button>
 
-                    <button
-                        onClick={() => navigate("/tickets")}
-                        className="w-full flex items-center px-6 py-3 hover:bg-blue-600 transition"
-                    >
-
-                        <span className="ml-3">
-                            Mes Tickets
-                        </span>
+                   <button onClick={() => navigate("/tickets")}
+                   className="w-full flex items-center px-6 py-3 hover:bg-blue-600 transition">
+                        Mes tickets
                     </button>
 
                 </nav>
@@ -209,8 +224,7 @@ function StudentDashboard() {
 
                             <button
                                 onClick={() => navigate("/evenements")}
-                                className="mt-5 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
-                            >
+                                className="mt-5 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg" >
                                 Voir les événements
                             </button>
 
@@ -246,13 +260,12 @@ function StudentDashboard() {
                             </h3>
 
                             <p className="text-4xl font-bold text-blue-600 mt-3">
-                                -
+                                { tickets.length}
                             </p>
 
                             <button
                                 onClick={() => navigate("/tickets")}
-                                className="mt-5 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
-                            >
+                                className="mt-5 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
                                 Mes tickets
                             </button>
 

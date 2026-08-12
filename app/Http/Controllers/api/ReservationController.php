@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use App\Models\Ticket;
+
 
 class ReservationController extends Controller
 {
@@ -38,26 +40,47 @@ class ReservationController extends Controller
     }
 
     // 3. Créer une réservation
-    public function store(Request $request)
+   public function store(Request $request)
     {
         $request->validate([
-            'codeReservation' => 'required|string|unique:reservations,codeReservation',
-            'dateReservation' => 'required|date',
             'evenement_id' => 'required|exists:evenements,id',
-            'etudiant_id' => 'required|exists:users,id',
         ]);
 
+        // Vérifier si l'utilisateur a déjà réservé cet événement
+        $dejaReserve = Reservation::where('etudiant_id', $request->user()->id)
+            ->where('evenement_id', $request->evenement_id)
+            ->exists();
+
+        if ($dejaReserve) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Vous avez déjà réservé cet événement.'
+            ], 409);
+        }
+
+        // Créer la réservation
         $reservation = Reservation::create([
-            'codeReservation' => $request->codeReservation,
-            'dateReservation' => $request->dateReservation,
+            'codeReservation' => 'BDE-' . time() . rand(100, 999),
+            'dateReservation' => now(),
             'evenement_id' => $request->evenement_id,
             'etudiant_id' => $request->user()->id,
         ]);
 
+        // Créer automatiquement le ticket
+        $ticket = Ticket::create([
+            'numero' => 'TICKET-' . time() . rand(100, 999),
+            'code' => uniqid('TICKET-'),
+            'reservation_id' => $reservation->id,
+        ]);
+
+        // Retourner réservation + ticket
         return response()->json([
             'success' => true,
-            'message' => 'Réservation créée avec succès',
-            'data' => $reservation
+            'message' => 'Réservation effectuée avec succès.',
+            'data' => [
+                'reservation' => $reservation,
+                'ticket' => $ticket,
+            ]
         ], 201);
     }
 

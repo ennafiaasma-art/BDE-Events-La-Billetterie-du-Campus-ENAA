@@ -78,15 +78,11 @@ function Events() {
             setLoadingReservation(evenementId);
             setMessage("");
 
-            await api.post("/reservations", {
-                codeReservation:"BDE-" + Date.now(),
-
-                dateReservation: new Date().toISOString().split("T")[0],
-
-                evenement_id: evenementId,
-
-                etudiant_id: user.id,
+      const response=  await api.post("/reservations", {
+                    evenement_id: evenementId,
             });
+                    console.log("Réservation créée :", response.data);
+
 
             setMessage(
                 "Réservation effectuée avec succès !"

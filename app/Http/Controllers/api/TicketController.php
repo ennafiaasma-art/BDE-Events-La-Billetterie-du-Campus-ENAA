@@ -8,10 +8,16 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
-    // Afficher tous les tickets
-    public function index()
+
+    public function index(Request $request)
     {
-        $tickets = Ticket::all();
+        $tickets = Ticket::with([
+            'reservation.evenement'
+        ])
+        ->whereHas('reservation', function ($query) use ($request) {
+            $query->where('etudiant_id', $request->user()->id);
+        })
+        ->get();
 
         return response()->json([
             'success' => true,
@@ -19,10 +25,16 @@ class TicketController extends Controller
         ], 200);
     }
 
-    // Afficher un ticket
-    public function show($id)
+
+    public function show(Request $request, $id)
     {
-        $ticket = Ticket::find($id);
+        $ticket = Ticket::with([
+            'reservation.evenement'
+        ])
+        ->whereHas('reservation', function ($query) use ($request) {
+            $query->where('etudiant_id', $request->user()->id);
+        })
+        ->find($id);
 
         if (!$ticket) {
             return response()->json([
@@ -37,7 +49,8 @@ class TicketController extends Controller
         ], 200);
     }
 
-    // Créer un ticket
+
+
     public function store(Request $request)
     {
         $request->validate([
@@ -59,7 +72,8 @@ class TicketController extends Controller
         ], 201);
     }
 
-    // Modifier un ticket
+
+
     public function update(Request $request, $id)
     {
         $ticket = Ticket::find($id);
@@ -72,16 +86,18 @@ class TicketController extends Controller
         }
 
         $request->validate([
-            'numero' => 'sometimes|required|string|unique:tickets,numero,' . $id,
-            'code' => 'sometimes|required|string|unique:tickets,code,' . $id,
-            'reservation_id' => 'sometimes|required|exists:reservations,id',
+            'numero' => 'sometimes|string|unique:tickets,numero,' . $id,
+            'code' => 'sometimes|string|unique:tickets,code,' . $id,
+            'reservation_id' => 'sometimes|exists:reservations,id',
         ]);
 
-        $ticket->update($request->only([
-            'numero',
-            'code',
-            'reservation_id'
-        ]));
+        $ticket->update(
+            $request->only([
+                'numero',
+                'code',
+                'reservation_id'
+            ])
+        );
 
         return response()->json([
             'success' => true,
@@ -90,7 +106,8 @@ class TicketController extends Controller
         ], 200);
     }
 
-    // Supprimer un ticket
+
+
     public function destroy($id)
     {
         $ticket = Ticket::find($id);
