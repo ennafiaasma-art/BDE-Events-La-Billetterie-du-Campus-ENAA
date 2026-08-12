@@ -1,6 +1,24 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
+/*
+  DESIGN NOTE
+  -----------
+  Same visual identity as StudentDashboard.jsx / MyTicket.jsx / MyReservations.jsx:
+  ink-violet / paper / coral / mint, Space Grotesk for display, IBM Plex Mono for
+  codes, prices & data — so all four pages read as one product.
+
+  Fonts (add once, e.g. in index.html <head>):
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  LOGIC NOTE
+  ----------
+  No functional changes. Same state (evenements, reservations, loading, error,
+  message, loadingReservation), same getEvents() / getReservations() / dejaReserve()
+  / reserver(), same effect, same conditions for loading / message / error / empty / list.
+*/
+
 function Events() {
     const [evenements, setEvenements] = useState([]);
     const [reservations, setReservations] = useState([]);
@@ -78,10 +96,10 @@ function Events() {
             setLoadingReservation(evenementId);
             setMessage("");
 
-      const response=  await api.post("/reservations", {
-                    evenement_id: evenementId,
+            const response = await api.post("/reservations", {
+                evenement_id: evenementId,
             });
-                    console.log("Réservation créée :", response.data);
+            console.log("Réservation créée :", response.data);
 
 
             setMessage(
@@ -112,52 +130,78 @@ function Events() {
         }
     };
 
+    const fontStyles = (
+        <style>{`
+            .font-display { font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif; }
+            .font-mono-tix { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+        `}</style>
+    );
+
     // Chargement
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-slate-100">
-                <p className="text-slate-500 text-lg">
-                    Chargement des événements...
-                </p>
+            <div
+                className="min-h-screen flex items-center justify-center bg-[#F6F4FB]"
+                style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+            >
+                {fontStyles}
+                <div className="flex flex-col items-center gap-3">
+                    <div className="w-8 h-8 border-2 border-[#5B4FE8]/20 border-t-[#5B4FE8] rounded-full animate-spin" />
+                    <p className="text-[#8B87A6] text-sm font-mono-tix">
+                        Chargement des événements…
+                    </p>
+                </div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-slate-100">
+        <div
+            className="min-h-screen bg-[#F6F4FB] text-[#14132B]"
+            style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+        >
+            {fontStyles}
 
             {/* Navbar */}
-            <nav className="bg-white border-b border-slate-200">
-                <div className="max-w-7xl mx-auto px-6 py-4">
-
-                    <h1 className="text-2xl font-bold text-blue-600">
-                        🎟️ BDE Events
+            <nav className="bg-[#14132B]">
+                <div className="max-w-7xl mx-auto px-6 py-4 flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-[#FF6B57] flex items-center justify-center font-display font-bold text-white text-sm">
+                        B
+                    </div>
+                    <h1 className="font-display text-lg font-semibold text-white">
+                        BDE Events
                     </h1>
-
                 </div>
             </nav>
 
             {/* Contenu */}
             <main className="max-w-7xl mx-auto px-6 py-10">
 
-                <h2 className="text-3xl font-bold text-slate-800">
-                    Événements du campus
-                </h2>
+                <div className="flex items-baseline justify-between flex-wrap gap-2">
+                    <h2 className="font-display text-3xl font-semibold text-[#14132B]">
+                        Événements du campus
+                    </h2>
+                    {!error && (
+                        <span className="font-mono-tix text-xs text-[#8B87A6] tracking-wide">
+                            {String(evenements.length).padStart(2, "0")} au programme
+                        </span>
+                    )}
+                </div>
 
-                <p className="mt-2 text-slate-500">
+                <p className="mt-1 text-[#8B87A6]">
                     Découvrez les prochains événements.
                 </p>
 
                 {/* Message */}
                 {message && (
-                    <div className="mt-6 p-4 bg-blue-50 text-blue-700 rounded-xl">
+                    <div className="mt-6 p-4 bg-[#5B4FE8]/10 text-[#5B4FE8] border border-[#5B4FE8]/20 rounded-xl text-sm font-medium">
                         {message}
                     </div>
                 )}
 
                 {/* Erreur */}
                 {error && (
-                    <div className="mt-6 p-4 bg-red-50 text-red-600 rounded-xl">
+                    <div className="mt-6 p-4 bg-[#E4574F]/10 text-[#C43F38] border border-[#E4574F]/20 rounded-xl text-sm font-medium">
                         {error}
                     </div>
                 )}
@@ -165,9 +209,15 @@ function Events() {
                 {/* Aucun événement */}
                 {!error &&
                     evenements.length === 0 && (
-                        <div className="mt-8 bg-white p-8 rounded-2xl text-center shadow">
-                            <p className="text-slate-500">
-                                Aucun événement disponible.
+                        <div className="mt-8 bg-white p-12 rounded-2xl text-center shadow-sm border border-[#E7E4F2]">
+                            <div className="mx-auto w-16 h-16 rounded-full bg-[#5B4FE8]/10 flex items-center justify-center">
+                                <span className="text-2xl">🎪</span>
+                            </div>
+                            <h3 className="mt-5 font-display text-xl font-semibold text-[#14132B]">
+                                Aucun événement disponible
+                            </h3>
+                            <p className="mt-2 text-[#8B87A6] text-sm">
+                                Reviens un peu plus tard, le programme se remplit vite.
                             </p>
                         </div>
                     )}
@@ -184,41 +234,41 @@ function Events() {
                         return (
                             <div
                                 key={evenement.id}
-                                className="bg-white rounded-2xl shadow-sm p-6 hover:shadow-lg transition"
+                                className="bg-white rounded-2xl shadow-sm border border-[#E7E4F2] p-6 hover:shadow-md hover:-translate-y-0.5 transition"
                             >
 
                                 {/* Titre + prix */}
                                 <div className="flex justify-between items-start gap-4">
 
-                                    <h3 className="text-xl font-bold text-slate-800">
+                                    <h3 className="font-display text-xl font-semibold text-[#14132B]">
                                         {evenement.titre}
                                     </h3>
 
-                                    <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-semibold whitespace-nowrap">
+                                    <span className="bg-[#FF6B57]/10 text-[#C43F38] px-3 py-1 rounded-full text-xs font-mono-tix font-semibold whitespace-nowrap">
                                         {evenement.prix} DH
                                     </span>
 
                                 </div>
 
                                 {/* Description */}
-                                <p className="mt-4 text-slate-600">
+                                <p className="mt-3 text-sm text-[#4B4869]">
                                     {evenement.description}
                                 </p>
 
                                 {/* Informations */}
-                                <div className="mt-5 space-y-2 text-sm text-slate-600">
+                                <div className="mt-5 space-y-2 text-sm text-[#4B4869] border-t border-dashed border-[#E7E4F2] pt-4">
 
-                                    <p>
-                                        📅 {evenement.date}
+                                    <p className="flex items-center gap-2">
+                                        <span>📅</span> {evenement.date}
                                     </p>
 
-                                    <p>
-                                        📍 {evenement.lieu}
+                                    <p className="flex items-center gap-2">
+                                        <span>📍</span> {evenement.lieu}
                                     </p>
 
-                                    <p>
-                                        👥 Capacité :{" "}
-                                        {evenement.capaciteMax}
+                                    <p className="flex items-center gap-2">
+                                        <span>👥</span> Capacité :{" "}
+                                        <span className="font-mono-tix">{evenement.capaciteMax}</span>
                                     </p>
 
                                 </div>
@@ -228,7 +278,7 @@ function Events() {
 
                                     <button
                                         disabled
-                                        className="mt-5 w-full bg-gray-400 text-white py-3 rounded-xl cursor-not-allowed"
+                                        className="mt-5 w-full bg-[#2FBF8F]/10 text-[#1C8F68] py-3 rounded-xl font-semibold text-sm cursor-not-allowed"
                                     >
                                         ✓ Déjà réservé
                                     </button>
@@ -245,11 +295,11 @@ function Events() {
                                             loadingReservation ===
                                             evenement.id
                                         }
-                                        className="mt-5 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition disabled:opacity-60"
+                                        className="mt-5 w-full bg-[#FF6B57] hover:bg-[#e85a47] text-white py-3 rounded-xl font-semibold text-sm transition disabled:opacity-60"
                                     >
                                         {loadingReservation ===
                                         evenement.id
-                                            ? "Réservation..."
+                                            ? "Réservation…"
                                             : "🎫 Réserver"}
                                     </button>
 
