@@ -1,86 +1,16 @@
-<<<<<<< HEAD
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-# BDE-Events-La-Billetterie-du-Campus-ENAA
->>>>>>> 975711ed57797ce768f1757cdfb9e9dc2e56c53c
-  
-
-
-
-
-
-  # 🎫 BDE-Events - La Billetterie du Campus ENAA
+# 🎫 BDE-Events — La Billetterie du Campus ENAA
 
 ## 📌 Description
 
-**BDE-Events** est une plateforme web développée avec **Laravel 12** permettant au Bureau des Étudiants (BDE) de gérer les événements du campus ENAA.
+**BDE-Events** est une plateforme web développée avec **Laravel 12** et **React** permettant au Bureau des Étudiants (BDE) de gérer les événements du campus ENAA.
 
-La plateforme offre un espace d'administration permettant de créer et gérer les événements ainsi qu'un espace étudiant où les utilisateurs peuvent réserver leur place, consulter leurs billets numériques et obtenir un pass unique pour chaque réservation.
+La plateforme offre :
+
+- un espace d'administration pour gérer les événements ;
+- un espace étudiant pour consulter les événements ;
+- un système de réservation ;
+- une gestion de la capacité maximale ;
+- la génération automatique d'un ticket numérique pour chaque réservation.
 
 ---
 
@@ -88,294 +18,359 @@ La plateforme offre un espace d'administration permettant de créer et gérer le
 
 - Digitaliser la gestion des événements du campus.
 - Simplifier le processus de réservation des étudiants.
-- Générer automatiquement un billet numérique unique.
-- Fournir un tableau de bord pour le suivi des réservations.
+- Éviter les doubles réservations.
+- Gérer automatiquement les places disponibles.
+- Générer automatiquement un ticket numérique unique.
+- Fournir un espace d'administration pour gérer les événements.
+- Centraliser les réservations des étudiants.
 
 ---
 
 # 🚀 Fonctionnalités
 
-## 👨‍💼 Administration (BDE)
+## 👨‍💼 Administration — BDE
 
-- Authentification administrateur
-- Création d'événements
-- Modification d'événements
-- Suppression d'événements
-- Gestion de la capacité maximale
-- Visualisation du nombre de réservations
-- Suivi des places restantes
+L'administrateur peut :
+
+- Se connecter à son espace.
+- Créer un événement.
+- Modifier un événement.
+- Supprimer un événement.
+- Consulter la liste des événements.
+- Définir une capacité maximale.
+- Suivre les réservations.
+- Suivre les places disponibles.
 
 ---
 
 ## 👨‍🎓 Espace Étudiant
 
-- Inscription
-- Connexion
-- Consultation des événements disponibles
-- Réservation d'un événement gratuit
-- Empêcher la double réservation
-- Consultation de l'historique des réservations
+L'étudiant peut :
+
+- Créer un compte.
+- Se connecter.
+- Consulter les événements disponibles.
+- Réserver un événement.
+- Consulter ses réservations.
+- Consulter ses tickets.
+
+Le système empêche :
+
+- une double réservation pour le même événement ;
+- une réservation lorsque la capacité maximale est atteinte.
+
+Lorsque toutes les places sont réservées, le système affiche :
+
+> **Les places sont épuisées pour cet événement.**
 
 ---
 
-## 🎟️ Gestion des Tickets
+# 🎟️ Gestion des Tickets
 
-Après une réservation, le système génère automatiquement :
+Après une réservation réussie, un ticket est généré automatiquement.
 
-- Un numéro de réservation unique
-- Un billet numérique (Pass Étudiant)
+Le ticket contient notamment :
 
-Le ticket contient :
-
-- Nom de l'étudiant
-- Titre de l'événement
-- Date
-- Heure
-- Lieu
-- Code de réservation
+- le numéro du ticket ;
+- le code du ticket ;
+- le code de réservation ;
+- les informations liées à la réservation.
 
 Exemple :
 
-```
+```text
 BDE-2026-8F4A92
-```
 
----
 
-# 📚 User Stories
+📚 User Stories
+Épic 1 — Gestion des événements
+US 1.1 — Créer un événement
 
-## Épic 1 : Gestion des événements
+L'administrateur peut créer un événement avec :
 
-### US 1.1
+Titre
+Description
+Date
+Lieu
+Prix
+Capacité maximale
 
-Créer un événement avec :
 
-- Titre
-- Description
-- Date
-- Heure
-- Lieu
-- Prix
-- Capacité maximale
 
-### US 1.2
+US 1.2 — Modifier un événement
 
-Consulter en temps réel :
+L'administrateur peut modifier les informations d'un événement existant.
 
-- Nombre de réservations
-- Places restantes
+US 1.3 — Supprimer un événement
 
----
+L'administrateur peut supprimer un événement.
 
-## Épic 2 : Réservation
+US 1.4 — Suivre la capacité
 
-### US 2.1
+L'administrateur peut suivre :
 
-Un étudiant peut :
+le nombre de réservations ;
+la capacité maximale ;
+les places restantes.
 
-- réserver un événement gratuit
-- uniquement si celui-ci n'est pas complet
-- une seule réservation par événement
 
----
 
-## Épic 3 : Génération du Pass
+Épic 2 — Réservation
+US 2.1 — Réserver un événement
 
-### US 3.1
+Un étudiant peut réserver un événement disponible.
 
-Chaque étudiant peut consulter son espace **Mes Billets** contenant son ticket numérique.
+Le système vérifie :
 
----
+que l'utilisateur est connecté ;
+que l'événement existe ;
+que l'étudiant n'a pas déjà réservé ;
+que la capacité maximale n'est pas atteinte
+US 2.2 — Consulter mes réservations
 
-# 🏗️ Architecture
+L'étudiant peut consulter la liste de ses réservations.
 
-```
-Laravel
+
+
+Épic 3 — Génération du Pass
+US 3.1 — Générer un ticket
+
+Après une réservation réussie, un ticket numérique est généré automatiquement.
+
+US 3.2 — Consulter mes billets
+
+L'étudiant peut consulter ses tickets depuis son espace personnel
+
+
+🏗️ Architecture du projet
+
+BDE-Events
 │
-├── Models
-│   ├── User
-│   ├── Evenement
-│   ├── Reservation
-│   └── Ticket
+├── Backend Laravel
+│   │
+│   ├── app/
+│   │   ├── Models/
+│   │   │   ├── User
+│   │   │   ├── Evenement
+│   │   │   ├── Reservation
+│   │   │   └── Ticket
+│   │   │
+│   │   └── Http/
+│   │       └── Controllers/
+│   │
+│   ├── database/
+│   │   ├── migrations/
+│   │   └── seeders/
+│   │
+│   └── routes/
 │
-├── Controllers
-│   ├── AuthController
-│   ├── EvenementController
-│   ├── ReservationController
-│   └── TicketController
+├── Frontend React
+│   │
+│   ├── src/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── ...
+│   │
+│   ├── public/
+│   └── package.json
 │
-├── Migrations
-├── Seeders
-├── Blade Views
-└── Routes
-```
+└── Docker
 
----
 
-# 🛠️ Technologies utilisées
 
-- Laravel 12
-- PHP 8.4
-- MySQL
-- Blade
-- Bootstrap / Tailwind CSS
-- Laravel Eloquent ORM
-- Git & GitHub
-- Docker
-- Swagger (Documentation API)
 
----
+🛠️ Technologies utilisées
 
-# 📂 Base de données
+Backend
+Laravel 12
+PHP 8.4
+Laravel Eloquent ORM
+MySQL
+API REST
 
-Les principales tables sont :
+Frontend
+React
+Vite
+Axios
+React Router
+Tailwind CSS
 
-- users
-- evenements
-- reservations
-- tickets
 
-Relations :
+Outils
+Git
+GitHub
+Jira
+Docker
+Docker Hub
+Postman
+📂 Base de données
 
-```
+Les principales tables utilisées sont :
+users
+evenements
+reservations
+tickets
+
+Relations principales :  
+
+
 User
-  │
-  ├── possède plusieurs Reservations
-  │
-Reservation
-  │
-  ├── appartient à un User
-  ├── appartient à un Evenement
-  └── possède un Ticket
+ │
+ └── possède plusieurs Reservations
+                  │
+                  ├── appartient à un User
+                  ├── appartient à un Evenement
+                  └── possède un Ticket
 
 Evenement
-  │
-  └── possède plusieurs Reservations
-```
+ │
+ └── possède plusieurs Reservations
 
----
 
-# 🔐 Rôles
 
-## Administrateur (BDE)
+🔐 Rôles
 
-- Gestion des événements
-- Consultation des réservations
-- Suivi des capacités
+Administrateur — BDE
+Gestion des événements
+Modification des événements
+Suppression des événements
+Suivi des réservations
+Suivi de la capacité
 
-## Étudiant
 
-- Réserver un événement
-- Consulter ses billets
-- Télécharger son pass
+Étudiant
+Inscription
+Connexion
+Consultation des événements
+Réservation
+Consultation des réservations
+Consultation des tickets
 
----
 
-# ⚙️ Installation
+🔌 API REST
 
-## Cloner le projet
+Les principales routes API comprennent :
 
-```bash
-git clone https://github.com/votre-utilisateur/BDE-Events.git
-```
 
-Entrer dans le dossier
 
-```bash
-cd BDE-Events
-```
+POST   /api/login
+POST   /api/logout
 
-Installer les dépendances
+GET    /api/evenements
+POST   /api/evenements
+PUT    /api/evenements/{id}
+DELETE /api/evenements/{id}
 
-```bash
+POST   /api/reservations
+GET    /api/mes-reservations
+
+🐳 Docker
+
+Le projet est conteneurisé avec Docker afin de faciliter le déploiement du Back-end Laravel et du Front-end React.
+
+🔹 Image Docker — API Back-end
+
+Image Docker du Back-end Laravel :
+
+tasmatasomacom/bde-events-api:latest
+Docker Hub :
+###
+Pour récupérer l'image :
+docker pull tasmatasomacom/bde-events-api:latest
+
+
+🔹 Image Docker — Front-end React
+Image Docker du Front-end React :
+
+tasmatasomacom/bde-events-frontend:latest
+
+Docker Hub :
+##
+Pour récupérer l'image :
+
+docker pull tasmatasomacom/bde-events-frontend:latest
+
+📦 Images Docker disponibles
+
+
+| Composant      | Image Docker                                |
+| -------------- | ------------------------------------------- |
+| Backend API    | `tasmatasomacom/bde-events-api:latest`      |
+| Frontend React | `tasmatasomacom/bde-events-frontend:latest` |
+
+
+⚙️ Installation en local
+
+1. Cloner le projet
+
+
+git clone https://github.com/VOTRE-UTILISATEUR/BDE-Events-La-Billetterie-du-Campus-ENAA.git
+
+
+
+Puis :
+cd BDE-Events-La-Billetterie-du-Campus-ENAA
+
+2. Backend Laravel
+
+
+Installer les dépendances :
+
 composer install
-```
 
-Copier le fichier d'environnement
-
-```bash
+Créer le fichier .env :
 cp .env.example .env
-```
 
-Générer la clé de l'application
 
-```bash
+Générer la clé Laravel :
+
 php artisan key:generate
-```
 
-Configurer la base de données dans `.env`
+Configurer les informations de connexion MySQL dans .env.
 
-Puis exécuter :
-
-```bash
+Puis lancer les migrations :
 php artisan migrate
-```
-
-Lancer le serveur
-
-```bash
+Lancer le serveur Laravel :
 php artisan serve
-```
 
----
 
-# 📖 Documentation API
 
-La documentation Swagger est disponible à l'adresse :
+3. Frontend React
+Entrer dans le dossier :
+cd frontend
+Installer les dépendances :
 
-```
+npm install
+Lancer le serveur de développement :
+npm run dev
+
+
+📖 Documentation API
+
+La documentation de l'API peut être consultée via :
 http://localhost:8000/api/documentation
-```
 
----
 
-# 📁 Structure du projet
+👨‍💻 Auteur
 
-```
-app/
-database/
-routes/
-resources/views/
-public/
-storage/
-```
+Asma Ennafia
 
----
+Étudiante en Développement Web
 
-# 📸 Captures d'écran
+École Numérique Ahmed El Hansali — ENAA
 
-À ajouter :
 
-- Tableau de bord administrateur
-- Liste des événements
-- Réservation
-- Mes billets
-- Ticket numérique
+📄 Licence
 
----
+Projet réalisé dans le cadre de la formation Développeur Web.
 
-# 👨‍💻 Auteur
 
-**Asma Ennafia**
 
-Étudiante en Développement Web 
-
-École Numérique Ahmed El Hansali (ENAA)
-
----
-
-# 📄 Licence
-
-Projet réalisé dans le cadre de la formation **Développeur Web **.
-
----
-
-# ✅ Améliorations futures
-
-- Paiement en ligne
-- QR Code sur les tickets
-- Notifications par email
-- Tableau de bord analytique
-- Export PDF des billets
-- Recherche et filtres des événements
-- Application mobile
+🚀 Améliorations futures
+Paiement en ligne
+QR Code sur les tickets
+Notifications par email
+Tableau de bord analytique
+Export PDF des billets
+Recherche et filtres des événements
+Application mobile
