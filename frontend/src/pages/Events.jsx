@@ -1,23 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
-/*
-  DESIGN NOTE
-  -----------
-  Same visual identity as StudentDashboard.jsx / MyTicket.jsx / MyReservations.jsx:
-  ink-violet / paper / coral / mint, Space Grotesk for display, IBM Plex Mono for
-  codes, prices & data — so all four pages read as one product.
 
-  Fonts (add once, e.g. in index.html <head>):
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  LOGIC NOTE
-  ----------
-  No functional changes. Same state (evenements, reservations, loading, error,
-  message, loadingReservation), same getEvents() / getReservations() / dejaReserve()
-  / reserver(), same effect, same conditions for loading / message / error / empty / list.
-*/
 
 function Events() {
     const [evenements, setEvenements] = useState([]);
@@ -231,6 +215,10 @@ function Events() {
                             evenement.id
                         );
 
+    const complet =
+        Number(evenement.reservations_count) >=
+        Number(evenement.capaciteMax)
+
                         return (
                             <div
                                 key={evenement.id}
@@ -274,37 +262,31 @@ function Events() {
                                 </div>
 
                                 {/* Bouton réservation */}
-                                {reserve ? (
-
-                                    <button
-                                        disabled
-                                        className="mt-5 w-full bg-[#2FBF8F]/10 text-[#1C8F68] py-3 rounded-xl font-semibold text-sm cursor-not-allowed"
-                                    >
-                                        ✓ Déjà réservé
-                                    </button>
-
-                                ) : (
-
-                                    <button
-                                        onClick={() =>
-                                            reserver(
-                                                evenement.id
-                                            )
-                                        }
-                                        disabled={
-                                            loadingReservation ===
-                                            evenement.id
-                                        }
-                                        className="mt-5 w-full bg-[#FF6B57] hover:bg-[#e85a47] text-white py-3 rounded-xl font-semibold text-sm transition disabled:opacity-60"
-                                    >
-                                        {loadingReservation ===
-                                        evenement.id
-                                            ? "Réservation…"
-                                            : "🎫 Réserver"}
-                                    </button>
-
-                                )}
-
+                               {reserve ? (
+    <button
+        disabled
+        className="mt-5 w-full bg-[#2FBF8F]/10 text-[#1C8F68] py-3 rounded-xl font-semibold text-sm cursor-not-allowed"
+    >
+        ✓ Déjà réservé
+    </button>
+) : complet ? (
+    <button
+        disabled
+        className="mt-5 w-full bg-gray-200 text-gray-500 py-3 rounded-xl font-semibold text-sm cursor-not-allowed"
+    >
+        ❌ Places épuisées
+    </button>
+) : (
+    <button
+        onClick={() => reserver(evenement.id)}
+        disabled={loadingReservation === evenement.id}
+        className="mt-5 w-full bg-[#FF6B57] hover:bg-[#e85a47] text-white py-3 rounded-xl font-semibold text-sm transition disabled:opacity-60"
+    >
+        {loadingReservation === evenement.id
+            ? "Réservation…"
+            : "🎫 Réserver"}
+    </button>
+)}
                             </div>
                         );
                     })}

@@ -10,9 +10,7 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
-    // =====================================================
     // 1. AFFICHER TOUTES LES RÉSERVATIONS
-    // =====================================================
 
     public function index()
     {
@@ -28,9 +26,7 @@ class ReservationController extends Controller
     }
 
 
-    // =====================================================
     // 2. AFFICHER UNE RÉSERVATION
-    // =====================================================
 
     public function show(Request $request, $id)
     {
@@ -53,9 +49,8 @@ class ReservationController extends Controller
     }
 
 
-    // =====================================================
     // 3. CRÉER UNE RÉSERVATION + TICKET
-    // =====================================================
+
 
     public function store(Request $request)
     {
@@ -85,9 +80,8 @@ class ReservationController extends Controller
         }
 
 
-        // -------------------------------------------------
         // Vérifier si l'utilisateur a déjà réservé
-        // -------------------------------------------------
+
 
         $dejaReserve = Reservation::where(
             'evenement_id',
@@ -107,9 +101,8 @@ class ReservationController extends Controller
         }
 
 
-        // -------------------------------------------------
+
         // Compter les réservations
-        // -------------------------------------------------
 
         $nombreReservations = Reservation::where(
             'evenement_id',
@@ -117,9 +110,7 @@ class ReservationController extends Controller
         )->count();
 
 
-        // -------------------------------------------------
         // Vérifier la capacité maximale
-        // -------------------------------------------------
 
         if ($nombreReservations >= $evenement->capaciteMax) {
 
@@ -130,9 +121,8 @@ class ReservationController extends Controller
         }
 
 
-        // -------------------------------------------------
+
         // Créer la réservation
-        // -------------------------------------------------
 
         $reservation = Reservation::create([
             'codeReservation' => 'BDE-' . time() . rand(100, 999),
@@ -142,9 +132,7 @@ class ReservationController extends Controller
         ]);
 
 
-        // -------------------------------------------------
         // Créer automatiquement le ticket
-        // -------------------------------------------------
 
         $ticket = Ticket::create([
             'numero' => 'TICKET-' . time() . rand(100, 999),
@@ -153,9 +141,8 @@ class ReservationController extends Controller
         ]);
 
 
-        // -------------------------------------------------
         // Retourner réservation + ticket
-        // -------------------------------------------------
+
 
         return response()->json([
             'success' => true,
@@ -168,9 +155,7 @@ class ReservationController extends Controller
     }
 
 
-    // =====================================================
     // 4. MODIFIER UNE RÉSERVATION
-    // =====================================================
 
     public function update(Request $request, $id)
     {
@@ -194,10 +179,8 @@ class ReservationController extends Controller
         }
 
 
-        // -------------------------------------------------
         // Vérifier que la réservation appartient
         // à l'utilisateur connecté
-        // -------------------------------------------------
 
         if ($reservation->etudiant_id != $user->id) {
 
@@ -208,9 +191,8 @@ class ReservationController extends Controller
         }
 
 
-        // -------------------------------------------------
         // Validation
-        // -------------------------------------------------
+
 
         $request->validate([
             'dateReservation' => 'sometimes|date',
@@ -218,10 +200,9 @@ class ReservationController extends Controller
         ]);
 
 
-        // -------------------------------------------------
+
         // Si l'événement change
         // vérifier la capacité
-        // -------------------------------------------------
 
         if (
             $request->has('evenement_id') &&
@@ -278,9 +259,7 @@ class ReservationController extends Controller
         }
 
 
-        // -------------------------------------------------
         // Modifier
-        // -------------------------------------------------
 
         $reservation->update([
             'dateReservation' =>
@@ -301,9 +280,7 @@ class ReservationController extends Controller
     }
 
 
-    // =====================================================
     // 5. SUPPRIMER / ANNULER UNE RÉSERVATION
-    // =====================================================
 
     public function destroy(Request $request, $id)
     {
@@ -356,9 +333,8 @@ class ReservationController extends Controller
     }
 
 
-    // =====================================================
     // 6. MES RÉSERVATIONS
-    // =====================================================
+
 
     public function mesReservations(Request $request)
     {

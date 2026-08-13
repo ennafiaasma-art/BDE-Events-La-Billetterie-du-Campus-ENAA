@@ -2,6 +2,25 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 
+/*
+  DESIGN NOTE
+  -----------
+  Same visual identity as the rest of the app (dashboards, tickets, réservations,
+  événements): ink-violet / paper / coral / mint, Space Grotesk for display,
+  IBM Plex Mono for numeric fields.
+
+  Fonts (add once, e.g. in index.html <head>):
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  LOGIC NOTE
+  ----------
+  No functional changes. Same state (form, message, loading), same handleChange(),
+  same handleSubmit() incl. the user check, the api.post payload (with Number()
+  conversions and admin_id), the form reset, and the 1s setTimeout redirect to
+  "/admin/dashboard". Same fields, same "required"/"min" constraints.
+*/
+
 function CreerEvenement() {
 
     const navigate = useNavigate();
@@ -96,8 +115,21 @@ function CreerEvenement() {
         }
     };
 
+    const inputClass =
+        "w-full border border-[#E7E4F2] rounded-xl p-3 text-sm text-[#14132B] placeholder:text-[#8B87A6] bg-[#F6F4FB]/40 focus:outline-none focus:ring-2 focus:ring-[#5B4FE8]/30 focus:border-[#5B4FE8] transition";
+
+    const labelClass =
+        "block mb-2 text-xs font-mono-tix uppercase tracking-wider text-[#8B87A6]";
+
     return (
-        <div className="min-h-screen bg-slate-100 p-8">
+        <div
+            className="min-h-screen bg-[#F6F4FB] p-8"
+            style={{ fontFamily: "'Inter', system-ui, sans-serif" }}
+        >
+            <style>{`
+                .font-display { font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif; }
+                .font-mono-tix { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+            `}</style>
 
             <div className="max-w-3xl mx-auto">
 
@@ -105,37 +137,47 @@ function CreerEvenement() {
                     onClick={() =>
                         navigate("/admin/dashboard")
                     }
-                    className="mb-6 text-blue-600 hover:underline"
+                    className="mb-6 text-sm font-medium text-[#5B4FE8] hover:text-[#4a3fd1] transition inline-flex items-center gap-1"
                 >
                     ← Retour au dashboard
                 </button>
 
-                <div className="bg-white rounded-2xl shadow p-8">
+                <div className="bg-white rounded-2xl shadow-sm border border-[#E7E4F2] overflow-hidden">
 
-                    <h1 className="text-3xl font-bold text-slate-800">
-                        Créer un événement
-                    </h1>
+                    <div className="p-8 pb-6">
 
-                    <p className="text-slate-500 mt-2">
-                        Ajouter un nouvel événement au campus.
-                    </p>
-
-                    {message && (
-                        <div className="mt-6 p-4 rounded-xl bg-blue-50 text-blue-700">
-                            {message}
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-lg bg-[#5B4FE8]/10 flex items-center justify-center text-lg">
+                                🎪
+                            </div>
+                            <div>
+                                <h1 className="font-display text-2xl font-semibold text-[#14132B]">
+                                    Créer un événement
+                                </h1>
+                                <p className="text-[#8B87A6] text-sm mt-0.5">
+                                    Ajouter un nouvel événement au campus.
+                                </p>
+                            </div>
                         </div>
-                    )}
+
+                        {message && (
+                            <div className="mt-6 p-4 rounded-xl bg-[#5B4FE8]/10 text-[#5B4FE8] border border-[#5B4FE8]/20 text-sm font-medium">
+                                {message}
+                            </div>
+                        )}
+
+                    </div>
 
                     <form
                         onSubmit={handleSubmit}
-                        className="mt-8 space-y-5"
+                        className="px-8 pb-8 space-y-5"
                     >
 
                         {/* TITRE */}
 
                         <div>
 
-                            <label className="block mb-2 font-semibold">
+                            <label className={labelClass}>
                                 Titre
                             </label>
 
@@ -146,7 +188,7 @@ function CreerEvenement() {
                                 onChange={handleChange}
                                 required
                                 placeholder="Ex : Journée sportive"
-                                className="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className={inputClass}
                             />
 
                         </div>
@@ -155,7 +197,7 @@ function CreerEvenement() {
 
                         <div>
 
-                            <label className="block mb-2 font-semibold">
+                            <label className={labelClass}>
                                 Description
                             </label>
 
@@ -166,7 +208,7 @@ function CreerEvenement() {
                                 required
                                 rows="4"
                                 placeholder="Description de l'événement"
-                                className="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className={inputClass}
                             />
 
                         </div>
@@ -175,7 +217,7 @@ function CreerEvenement() {
 
                         <div>
 
-                            <label className="block mb-2 font-semibold">
+                            <label className={labelClass}>
                                 Date
                             </label>
 
@@ -185,7 +227,7 @@ function CreerEvenement() {
                                 value={form.date}
                                 onChange={handleChange}
                                 required
-                                className="w-full border border-slate-200 rounded-xl p-3"
+                                className={`${inputClass} font-mono-tix`}
                             />
 
                         </div>
@@ -194,7 +236,7 @@ function CreerEvenement() {
 
                         <div>
 
-                            <label className="block mb-2 font-semibold">
+                            <label className={labelClass}>
                                 Lieu
                             </label>
 
@@ -205,7 +247,7 @@ function CreerEvenement() {
                                 onChange={handleChange}
                                 required
                                 placeholder="Ex : Salle A"
-                                className="w-full border border-slate-200 rounded-xl p-3"
+                                className={inputClass}
                             />
 
                         </div>
@@ -216,7 +258,7 @@ function CreerEvenement() {
 
                             <div>
 
-                                <label className="block mb-2 font-semibold">
+                                <label className={labelClass}>
                                     Prix (DH)
                                 </label>
 
@@ -227,14 +269,14 @@ function CreerEvenement() {
                                     onChange={handleChange}
                                     min="0"
                                     required
-                                    className="w-full border border-slate-200 rounded-xl p-3"
+                                    className={`${inputClass} font-mono-tix`}
                                 />
 
                             </div>
 
                             <div>
 
-                                <label className="block mb-2 font-semibold">
+                                <label className={labelClass}>
                                     Capacité maximale
                                 </label>
 
@@ -245,7 +287,7 @@ function CreerEvenement() {
                                     onChange={handleChange}
                                     min="1"
                                     required
-                                    className="w-full border border-slate-200 rounded-xl p-3"
+                                    className={`${inputClass} font-mono-tix`}
                                 />
 
                             </div>
@@ -257,10 +299,13 @@ function CreerEvenement() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold disabled:opacity-50"
+                            className="w-full bg-[#FF6B57] hover:bg-[#e85a47] text-white py-3 rounded-xl font-semibold text-sm transition disabled:opacity-50 flex items-center justify-center gap-2"
                         >
+                            {loading && (
+                                <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                            )}
                             {loading
-                                ? "Création..."
+                                ? "Création…"
                                 : "Créer l'événement"}
                         </button>
 

@@ -9,15 +9,15 @@ use Illuminate\Http\Request;
 class EvenementController extends Controller
 {
     // 1. Afficher tous les événements
-    public function index()
-    {
-        $evenements = Evenement::all();
+   public function index()
+{
+    $evenements = Evenement::withCount('reservations')->get();
 
-        return response()->json([
-            'success' => true,
-            'data' => $evenements
-        ], 200);
-    }
+    return response()->json([
+        'success' => true,
+        'data' => $evenements
+    ], 200);
+}
 
     // 2. Afficher un événement
     public function show($id)
@@ -46,7 +46,7 @@ class EvenementController extends Controller
         'date' => 'required|date',
         'lieu' => 'required|string|max:255',
         'prix' => 'required|numeric|min:0',
-        'capaciteMax' => 'required|integer|min:1',
+        'capaciteMax' => 'required|integer|min:0',
     ]);
 
     $evenement = Evenement::create([

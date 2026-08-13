@@ -3,25 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import MyTickets from "./MyTicket";
 
-/*
-  DESIGN NOTE
-  -----------
-  Direction: "carnet de billets" — the dashboard borrows from a real event-ticket
-  stub: a perforated tear line, a monospace serial for counts, a coral "stamp"
-  for the CTA. Palette is ink-violet / paper / coral / mint, not the default
-  cream+terracotta or dark+neon combo.
 
-  Fonts (add once, e.g. in index.html <head> or a global CSS import):
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  LOGIC NOTE
-  ----------
-  All data-fetching, reservation, and logout logic is unchanged from the
-  original. The only functional change: `loadingTickets` was referenced
-  (setLoadingTickets) but never declared in the original file, which would
-  throw at runtime. It's declared here so the tickets fetch doesn't crash.
-*/
 
 function StudentDashboard() {
     const navigate = useNavigate();

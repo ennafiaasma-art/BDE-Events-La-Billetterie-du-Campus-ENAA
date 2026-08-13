@@ -1,23 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
-/*
-  DESIGN NOTE
-  -----------
-  Same visual identity as StudentDashboard.jsx / MyTicket.jsx: ink-violet / paper
-  / coral / mint, Space Grotesk for display, IBM Plex Mono for codes & data —
-  so the three pages read as one product.
-
-  Fonts (add once, e.g. in index.html <head>):
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  LOGIC NOTE
-  ----------
-  No functional changes. Same state (reservations, loading, error, deletingId),
-  same getReservations(), same cancelReservation() incl. window.confirm / alert,
-  same effect, same conditions for loading / error / empty / list.
-*/
 
 function MyReservations() {
     const [reservations, setReservations] = useState([]);

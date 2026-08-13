@@ -1,22 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 
-/*
-  DESIGN NOTE
-  -----------
-  Same visual identity as StudentDashboard.jsx: ink-violet / paper / coral / mint,
-  Space Grotesk for display, IBM Plex Mono for codes & data, dashed "tear line"
-  and perforation to keep the ticket-stub metaphor consistent across pages.
 
-  Fonts (add once, e.g. in index.html <head>):
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  LOGIC NOTE
-  ----------
-  No functional changes. Same state (tickets, loading, error), same getTickets(),
-  same effect, same conditions for loading / error / empty / list.
-*/
 
 function MyTickets() {
     const [tickets, setTickets] = useState([]);
