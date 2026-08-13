@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,24 +17,30 @@ class AuthentificationController extends Controller
 
         if (!Auth::attempt($credentials)) {
             return response()->json([
+                'success' => false,
                 'message' => 'Email ou mot de passe incorrect'
             ], 401);
         }
 
         $user = Auth::user();
 
+        $token = $user->createToken('react-token')->plainTextToken;
+
         return response()->json([
+            'success' => true,
             'message' => 'Connexion réussie',
             'user' => $user,
-        ]);
+            'token' => $token,
+        ], 200);
     }
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        $request->user()->currentAccessToken()?->delete();
 
         return response()->json([
+            'success' => true,
             'message' => 'Déconnexion réussie'
-        ]);
+        ], 200);
     }
 }

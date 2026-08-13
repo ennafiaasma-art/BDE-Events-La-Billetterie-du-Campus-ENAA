@@ -21,7 +21,7 @@ class Evenement extends Model
         return $this->belongsTo(User::class,'admin_id');
     }
     public function reservations(){
-        return $this->hasMany(Reservation::class);
+        return $this->hasMany(Reservation::class , 'evenement_id');
     }
 
     //
