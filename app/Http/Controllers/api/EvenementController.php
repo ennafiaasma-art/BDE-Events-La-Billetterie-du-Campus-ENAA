@@ -38,74 +38,72 @@ class EvenementController extends Controller
     }
 
     // 3. Créer un événement
-    public function store(Request $request)
-    {
-        $request->validate([
-            'titre' => 'required|string|max:255',
-            'description' => 'required|string',
-            'date' => 'required|date',
-            'lieu' => 'required|string|max:255',
-            'prix' => 'required|numeric|min:0',
-            'capaciteMax' => 'required|integer|min:1',
-            'admin_id' => 'required|exists:users,id',
-        ]);
+  public function store(Request $request)
+{
+    $request->validate([
+        'titre' => 'required|string|max:255',
+        'description' => 'required|string',
+        'date' => 'required|date',
+        'lieu' => 'required|string|max:255',
+        'prix' => 'required|numeric|min:0',
+        'capaciteMax' => 'required|integer|min:1',
+    ]);
 
-        $evenement = Evenement::create([
-            'titre' => $request->titre,
-            'description' => $request->description,
-            'date' => $request->date,
-            'lieu' => $request->lieu,
-            'prix' => $request->prix,
-            'capaciteMax' => $request->capaciteMax,
-            'admin_id' => $request->admin_id,
-        ]);
+    $evenement = Evenement::create([
+        'titre' => $request->titre,
+        'description' => $request->description,
+        'date' => $request->date,
+        'lieu' => $request->lieu,
+        'prix' => $request->prix,
+        'capaciteMax' => $request->capaciteMax,
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Événement créé avec succès',
-            'data' => $evenement
-        ], 201);
-    }
+        // Admin connecté
+        'admin_id' => $request->user()->id,
+    ]);
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Événement créé avec succès',
+        'data' => $evenement
+    ], 201);
+}
 
     // 4. Modifier un événement
-    public function update(Request $request, $id)
-    {
-        $evenement = Evenement::find($id);
+  public function update(Request $request, $id)
+{
+    $evenement = Evenement::find($id);
 
-        if (!$evenement) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Événement introuvable'
-            ], 404);
-        }
-
-        $request->validate([
-            'titre' => 'sometimes|string|max:255',
-            'description' => 'sometimes|string',
-            'date' => 'sometimes|date',
-            'lieu' => 'sometimes|string|max:255',
-            'prix' => 'sometimes|numeric|min:0',
-            'capaciteMax' => 'sometimes|integer|min:1',
-            'admin_id' => 'sometimes|exists:users,id',
-        ]);
-
-        $evenement->update([
-            'titre' => $request->titre ?? $evenement->titre,
-            'description' => $request->description ?? $evenement->description,
-            'date' => $request->date ?? $evenement->date,
-            'lieu' => $request->lieu ?? $evenement->lieu,
-            'prix' => $request->prix ?? $evenement->prix,
-            'capaciteMax' => $request->capaciteMax ?? $evenement->capaciteMax,
-            'admin_id' => $request->admin_id ?? $evenement->admin_id,
-        ]);
-
+    if (!$evenement) {
         return response()->json([
-            'success' => true,
-            'message' => 'Événement modifié avec succès',
-            'data' => $evenement
-        ], 200);
+            'success' => false,
+            'message' => 'Événement introuvable'
+        ], 404);
     }
 
+    $request->validate([
+        'titre' => 'sometimes|string|max:255',
+        'description' => 'sometimes|string',
+        'date' => 'sometimes|date',
+        'lieu' => 'sometimes|string|max:255',
+        'prix' => 'sometimes|numeric|min:0',
+        'capaciteMax' => 'sometimes|integer|min:1',
+    ]);
+
+    $evenement->update($request->only([
+        'titre',
+        'description',
+        'date',
+        'lieu',
+        'prix',
+        'capaciteMax',
+    ]));
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Événement modifié avec succès',
+        'data' => $evenement
+    ], 200);
+}
     // 5. Supprimer un événement
     public function destroy($id)
     {

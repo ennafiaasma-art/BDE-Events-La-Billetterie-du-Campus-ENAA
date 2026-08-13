@@ -8,47 +8,62 @@ function Login() {
     const [message, setMessage] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
 
-   const handleLogin = async (e) => {
-    e.preventDefault();
+    const handleLogin = async (e) => {
+        e.preventDefault();
 
-    setMessage("");
-    setLoading(true);
+        setMessage("");
+        setLoading(true);
 
-    try {
-        const response = await api.post("/login", {
-            email,
-            password,
-        });
+        try {
+            // IMPORTANT : await est à l'intérieur de la fonction async
+            const response = await api.post("/login", {
+                email: email,
+                password: password,
+            });
 
-        console.log(response.data);
+            console.log("Réponse login :", response.data);
 
-        localStorage.setItem("token", response.data.token);
+            // Sauvegarder le token
+            localStorage.setItem(
+                "token",
+                response.data.token
+            );
 
-        localStorage.setItem(
-            "user",
-            JSON.stringify(response.data.user)
-        );
+            // Sauvegarder l'utilisateur
+            localStorage.setItem(
+                "user",
+                JSON.stringify(response.data.user)
+            );
 
-        setMessage("Connexion réussie !");
+            setMessage("Connexion réussie !");
 
-        setTimeout(() => {
-            navigate("/dashboard");
-        }, 500);
+            // Redirection selon le rôle
+            setTimeout(() => {
 
-    } catch (error) {
-        console.error(error);
+                if (response.data.user.role === "admin") {
+                    navigate("/admin/dashboard");
+                } else {
+                    navigate("/dashboard");
+                }
 
-        setMessage(
-            error.response?.data?.message ||
-            "Email ou mot de passe incorrect."
-        );
+            }, 500);
 
-    } finally {
-        setLoading(false);
-    }
-};
+        } catch (error) {
+
+            console.error("Erreur login :", error);
+
+            setMessage(
+                error.response?.data?.message ||
+                "Email ou mot de passe incorrect."
+            );
+
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="min-h-screen flex bg-slate-50">
@@ -56,10 +71,9 @@ function Login() {
             {/* LEFT */}
             <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-950 text-white p-12 flex-col">
 
-                {/* Logo */}
                 <div className="flex items-center gap-3">
                     <div className="w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center text-2xl">
-                      
+                        🎟️
                     </div>
 
                     <span className="text-2xl font-bold">
@@ -67,7 +81,6 @@ function Login() {
                     </span>
                 </div>
 
-                {/* Text */}
                 <div className="flex-1 flex flex-col justify-center max-w-xl">
 
                     <h1 className="text-5xl xl:text-6xl font-extrabold leading-tight">
@@ -82,8 +95,8 @@ function Login() {
                         tous les événements du campus au même endroit.
                     </p>
 
-                    {/* Ticket */}
                     <div className="mt-10 w-80 p-6 rounded-2xl bg-white/10 border border-white/20 backdrop-blur">
+
                         <span className="text-xs tracking-[4px] text-blue-200">
                             EVENT
                         </span>
@@ -95,17 +108,18 @@ function Login() {
                         <p className="mt-3 text-blue-100">
                             Votre prochaine expérience commence ici.
                         </p>
+
                     </div>
 
                 </div>
             </div>
+
 
             {/* RIGHT */}
             <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-10">
 
                 <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8 sm:p-10">
 
-                    {/* Header */}
                     <div className="mb-8">
 
                         <h2 className="text-3xl font-bold text-slate-900">
@@ -117,6 +131,7 @@ function Login() {
                         </p>
 
                     </div>
+
 
                     <form onSubmit={handleLogin}>
 
@@ -150,7 +165,9 @@ function Login() {
                                 />
 
                             </div>
+
                         </div>
+
 
                         {/* PASSWORD */}
                         <div className="mb-5">
@@ -163,13 +180,6 @@ function Login() {
                                 >
                                     Mot de passe
                                 </label>
-
-                                <a
-                                    href="#"
-                                    className="text-sm text-blue-600 hover:text-blue-700"
-                                >
-                                    Mot de passe oublié ?
-                                </a>
 
                             </div>
 
@@ -203,11 +213,13 @@ function Login() {
                                     }
                                     className="absolute right-4 top-1/2 -translate-y-1/2"
                                 >
-                                    {showPassword ? "" : "👁️"}
+                                    {showPassword ? "🙈" : "👁️"}
                                 </button>
 
                             </div>
+
                         </div>
+
 
                         {/* MESSAGE */}
                         {message && (
@@ -222,6 +234,7 @@ function Login() {
                             </div>
                         )}
 
+
                         {/* BUTTON */}
                         <button
                             type="submit"
@@ -235,23 +248,10 @@ function Login() {
 
                     </form>
 
-                    {/* REGISTER */}
-                    <div className="mt-7 text-center text-sm text-slate-500">
-
-                        Vous n'avez pas encore de compte ?
-
-                        <a
-                            href="#"
-                            className="ml-1 text-blue-600 font-semibold hover:underline"
-                        >
-                            Créer un compte
-                        </a>
-
-                    </div>
-
                 </div>
 
             </div>
+
         </div>
     );
 }

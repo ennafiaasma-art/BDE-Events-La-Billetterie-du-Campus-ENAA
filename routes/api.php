@@ -8,11 +8,9 @@ use App\Http\Controllers\Api\ReservationController;
 use App\Http\Controllers\Api\TicketController;
 
 
-
-
-// | AUTHENTIFICATION
-
-
+// =====================================================
+// AUTHENTIFICATION
+// =====================================================
 
 Route::post('/login', [
     AuthentificationController::class,
@@ -20,84 +18,81 @@ Route::post('/login', [
 ]);
 
 
+// =====================================================
+// ÉVÉNEMENTS - PUBLIC
+// =====================================================
 
-
-//  ÉVÉNEMENTS
-
-
-
+// Tout le monde peut consulter les événements
 Route::get('/evenements', [
     EvenementController::class,
     'index'
 ]);
 
-Route::post('/evenements', [
-    EvenementController::class,
-    'store'
-]);
 
-Route::put('/evenements/{id}', [
-    EvenementController::class,
-    'update'
-]);
-
-Route::delete('/evenements/{id}', [
-    EvenementController::class,
-    'destroy'
-]);
-
-
-
-
-// ROUTES UTILISATEUR CONNECTÉ
-
-
+// =====================================================
+// UTILISATEUR CONNECTÉ
+// =====================================================
 
 Route::middleware('auth:sanctum')->group(function () {
 
-
     // Logout
-
     Route::post('/logout', [
         AuthentificationController::class,
         'logout'
     ]);
 
-
-
-    //  Mes réservations
-
+    // Mes réservations
     Route::get('/mes-reservations', [
         ReservationController::class,
         'mesReservations'
     ]);
 
-
-
-    //  Créer une réservation
-
+    // Créer une réservation
     Route::post('/reservations', [
         ReservationController::class,
         'store'
     ]);
 
-
-    //  Annuler une réservation
-
+    // Annuler une réservation
     Route::delete('/reservations/{id}', [
         ReservationController::class,
         'destroy'
     ]);
 
+    // Mes tickets
+    Route::get('/tickets', [
+        TicketController::class,
+        'index'
+    ]);
 
-
-    //  Mes tickets
-
-   Route::middleware('auth:sanctum')->group(function () {
-
-    Route::get('/tickets', [ TicketController::class,'index']);
-    Route::get('/tickets/{id}', [TicketController::class,'show']);
-
+    Route::get('/tickets/{id}', [
+        TicketController::class,
+        'show'
+    ]);
 });
 
+
+// =====================================================
+// ADMIN
+// =====================================================
+
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+
+    // Créer un événement
+    Route::post('/evenements', [
+        EvenementController::class,
+        'store'
+    ]);
+
+    // Modifier un événement
+    Route::put('/evenements/{id}', [
+        EvenementController::class,
+        'update'
+    ]);
+
+    // Supprimer un événement
+    Route::delete('/evenements/{id}', [
+        EvenementController::class,
+        'destroy'
+    ]);
 });

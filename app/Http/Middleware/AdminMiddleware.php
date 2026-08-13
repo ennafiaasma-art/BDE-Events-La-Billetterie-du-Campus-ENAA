@@ -15,16 +15,17 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!$request->user()){
+        $user = $request->user();
+        if(!$user){
             return response()->json([
                 'success'=>false,
                 'message'=>'utilisateur non authentifie'
             ],401);
         }
-        if($request->user()->role!='admin'){
+        if($user->role!='admin'){
             return response()->json([
                 'success'=>false,
-                'massage'=>'Acces interdit . reserve aux administrateur'
+                'message'=>'Acces interdit . reserve aux administrateur'
             ],403);
         }
         return $next($request);
