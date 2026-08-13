@@ -83,6 +83,11 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         EvenementController::class,
         'store'
     ]);
+     // Récupérer un événement
+    Route::get('/evenements/{id}', [
+        EvenementController::class,
+        'show'
+    ]);
 
     // Modifier un événement
     Route::put('/evenements/{id}', [
